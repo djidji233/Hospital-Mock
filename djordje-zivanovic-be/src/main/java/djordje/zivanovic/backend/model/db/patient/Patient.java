@@ -2,6 +2,9 @@ package djordje.zivanovic.backend.model.db.patient;
 
 import djordje.zivanovic.backend.model.db.GenderEnum;
 import djordje.zivanovic.backend.model.db.MaritalStatusEnum;
+import djordje.zivanovic.backend.model.db.examination.Examination;
+import djordje.zivanovic.backend.model.db.organization.Organization;
+import djordje.zivanovic.backend.model.db.practitioner.Practitioner;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -65,5 +69,16 @@ public class Patient {
     @Column(name = "MARITAL_STATUS")
     @Enumerated(EnumType.STRING)
     private MaritalStatusEnum maritalStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "ORGANIZATION_ID", referencedColumnName = "ORGANIZATION_ID")
+    private Organization organization;
+
+    @ManyToOne
+    @JoinColumn(name = "PRACTITIONER_ID", referencedColumnName = "PRACTITIONER_ID")
+    private Practitioner primaryCareProvider;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<Examination> examinations;
 
 }

@@ -1,6 +1,9 @@
 package djordje.zivanovic.backend.model.db.practitioner;
 
 import djordje.zivanovic.backend.model.db.GenderEnum;
+import djordje.zivanovic.backend.model.db.examination.Examination;
+import djordje.zivanovic.backend.model.db.organization.Organization;
+import djordje.zivanovic.backend.model.db.patient.Patient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -61,5 +65,19 @@ public class Practitioner {
     @Column(name = "QUALIFICATION")
     @Enumerated(EnumType.STRING)
     private PractitionerQualificationEnum qualification;
+
+    @ManyToOne
+    @JoinColumn(name = "ORGANIZATION_ID", referencedColumnName = "ORGANIZATION_ID")
+    private Organization organization;
+
+    @OneToMany(mappedBy = "primaryCareProvider", cascade = CascadeType.ALL)
+    private List<Patient> patients;
+
+    @ManyToMany
+    @JoinTable(name = "PRACTITIONER_EXAMINATIONS",
+            joinColumns = @JoinColumn(name = "PRACTITIONER_ID", referencedColumnName = "PRACTITIONER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "EXAMINATION_ID", referencedColumnName = "EXAMINATION_ID")
+    )
+    private List<Examination> examinations;
 
 }
