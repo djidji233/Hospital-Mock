@@ -30,7 +30,7 @@ public class Organization {
     private Boolean active;
 
     @ManyToOne
-    @JoinColumn(name = "ORGANIZATION_TYPE_ID", referencedColumnName = "ORGANIZATION_TYPE_ID", nullable = false)
+    @JoinColumn(name = "ORGANIZATION_TYPE", referencedColumnName = "ORGANIZATION_TYPE", nullable = false)
     private OrganizationType type;
 
     @Column(name = "NAME", nullable = false, unique = true)
