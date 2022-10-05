@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.lang.module.FindException;
 import java.sql.Date;
@@ -34,10 +35,11 @@ public class Examination {
     private ExaminationStatusEnum status;
 
     @ManyToOne
-    @JoinColumn(name = "SERVICE_TYPE", referencedColumnName = "SERVICE_TYPE", nullable = false)
+    @JoinColumn(name = "SERVICE_TYPE_ID", referencedColumnName = "SERVICE_TYPE_ID", nullable = false)
     private ServiceType serviceType;
 
     @Column(name = "PRIORITY")
+    @Enumerated(EnumType.STRING)
     private ExaminationPriorityEnum priority;
 
     @Column(name = "START_DATE")
@@ -53,11 +55,11 @@ public class Examination {
     @JoinColumn(name = "ORGANIZATION_ID", referencedColumnName = "ORGANIZATION_ID")
     private Organization organization;
 
-    @ManyToMany(mappedBy = "examinations")
-    private List<Practitioner> practitioners;
-
     @ManyToOne
     @JoinColumn(name = "PATIENT_ID", referencedColumnName = "PATIENT_ID")
     private Patient patient;
+
+    @ManyToMany(mappedBy = "examinations", fetch = FetchType.LAZY)
+    private List<Practitioner> practitioners;
 
 }

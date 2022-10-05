@@ -10,10 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.sql.Date;
 import java.util.List;
 
@@ -77,8 +74,5 @@ public class Patient {
     @ManyToOne
     @JoinColumn(name = "PRACTITIONER_ID", referencedColumnName = "PRACTITIONER_ID")
     private Practitioner primaryCareProvider;
-
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-    private List<Examination> examinations;
 
 }

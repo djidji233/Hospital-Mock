@@ -34,7 +34,7 @@ public class Organization {
     private Boolean active;
 
     @ManyToOne
-    @JoinColumn(name = "ORGANIZATION_TYPE", referencedColumnName = "ORGANIZATION_TYPE", nullable = false)
+    @JoinColumn(name = "ORGANIZATION_TYPE_ID", referencedColumnName = "ORGANIZATION_TYPE_ID", nullable = false)
     private OrganizationType type;
 
     @Column(name = "NAME", nullable = false, unique = true)
@@ -51,14 +51,5 @@ public class Organization {
     @Column(name = "EMAIL")
     @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", flags = Pattern.Flag.CASE_INSENSITIVE)
     private String email;
-
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
-    private List<Practitioner> practitioners;
-
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
-    private List<Patient> patients;
-
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
-    private List<Examination> examinations;
 
 }

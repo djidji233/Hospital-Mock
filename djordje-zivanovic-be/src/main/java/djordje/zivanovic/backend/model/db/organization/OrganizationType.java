@@ -23,7 +23,4 @@ public class OrganizationType {
     @Enumerated(EnumType.STRING)
     private OrganizationTypeEnum organizationType;
 
-    @OneToMany(mappedBy = "type", cascade = CascadeType.ALL)
-    private List<Organization> organizations;
-
 }

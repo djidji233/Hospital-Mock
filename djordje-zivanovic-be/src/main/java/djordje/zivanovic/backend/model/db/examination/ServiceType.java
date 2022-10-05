@@ -23,7 +23,4 @@ public class ServiceType {
     @Enumerated(EnumType.STRING)
     private ServiceTypeEnum serviceType;
 
-    @OneToMany(mappedBy = "serviceType", cascade = CascadeType.ALL)
-    private List<Examination> examinations;
-
 }

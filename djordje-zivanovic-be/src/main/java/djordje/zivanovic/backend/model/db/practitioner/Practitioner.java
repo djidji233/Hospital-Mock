@@ -70,11 +70,9 @@ public class Practitioner {
     @JoinColumn(name = "ORGANIZATION_ID", referencedColumnName = "ORGANIZATION_ID")
     private Organization organization;
 
-    @OneToMany(mappedBy = "primaryCareProvider", cascade = CascadeType.ALL)
-    private List<Patient> patients;
-
-    @ManyToMany
-    @JoinTable(name = "PRACTITIONER_EXAMINATIONS",
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "PRACTITIONER_EXAMINATION",
             joinColumns = @JoinColumn(name = "PRACTITIONER_ID", referencedColumnName = "PRACTITIONER_ID"),
             inverseJoinColumns = @JoinColumn(name = "EXAMINATION_ID", referencedColumnName = "EXAMINATION_ID")
     )
