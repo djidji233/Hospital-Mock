@@ -15,7 +15,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
-import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -86,6 +85,20 @@ public class BootstrapData implements CommandLineRunner {
         serviceType.setServiceTypeId(1L);
         serviceType.setServiceType(ServiceTypeEnum.CARDIOLOGY);
         serviceTypeRepository.save(serviceType);
+        serviceTypeRepository.save(new ServiceType(2L, ServiceTypeEnum.GENERAL));
+        serviceTypeRepository.save(new ServiceType(3L, ServiceTypeEnum.INTENSIVE_CARE));
+        serviceTypeRepository.save(new ServiceType(4L, ServiceTypeEnum.ENDOCRINOLOGY));
+        serviceTypeRepository.save(new ServiceType(5L, ServiceTypeEnum.GYNECOLOGY));
+        serviceTypeRepository.save(new ServiceType(6L, ServiceTypeEnum.GASTROENTEROLOGY));
+        serviceTypeRepository.save(new ServiceType(7L, ServiceTypeEnum.HEMATOLOGY));
+        serviceTypeRepository.save(new ServiceType(8L, ServiceTypeEnum.NEUROLOGY));
+        serviceTypeRepository.save(new ServiceType(9L, ServiceTypeEnum.ONCOLOGY));
+        serviceTypeRepository.save(new ServiceType(10L, ServiceTypeEnum.PEDIATRICS));
+        serviceTypeRepository.save(new ServiceType(11L, ServiceTypeEnum.PULMONOLOGY));
+        serviceTypeRepository.save(new ServiceType(12L, ServiceTypeEnum.RADIOLOGY));
+        serviceTypeRepository.save(new ServiceType(13L, ServiceTypeEnum.OPHTHALMOLOGY));
+        serviceTypeRepository.save(new ServiceType(142L, ServiceTypeEnum.OTOLARYNGOLOGY));
+        serviceTypeRepository.save(new ServiceType(15L, ServiceTypeEnum.SURGERY));
 
         examination.setServiceType(serviceType);
         examination.setPriority(ExaminationPriorityEnum.ROUTINE);
@@ -103,6 +116,10 @@ public class BootstrapData implements CommandLineRunner {
         organizationType.setOrganizationTypeId(1L);
         organizationType.setOrganizationType(OrganizationTypeEnum.HOSPITAL);
         organizationTypeRepository.save(organizationType);
+        organizationTypeRepository.save(new OrganizationType(2L,OrganizationTypeEnum.INSURANCE_COMPANY));
+        organizationTypeRepository.save(new OrganizationType(3L, OrganizationTypeEnum.EDUCATIONAL_INSTITUTE));
+        organizationTypeRepository.save(new OrganizationType(4L, OrganizationTypeEnum.CLINICAL_RESEARCH));
+        organizationTypeRepository.save(new OrganizationType(5L, OrganizationTypeEnum.OTHER));
 
         organization.setType(organizationType);
         organization.setName("Organization 1");
