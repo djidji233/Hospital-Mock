@@ -1,9 +1,9 @@
 package djordje.zivanovic.backend.model.db.practitioner;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import djordje.zivanovic.backend.model.db.GenderEnum;
 import djordje.zivanovic.backend.model.db.examination.Examination;
 import djordje.zivanovic.backend.model.db.organization.Organization;
-import djordje.zivanovic.backend.model.db.patient.Patient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -76,6 +76,7 @@ public class Practitioner {
             joinColumns = @JoinColumn(name = "PRACTITIONER_ID", referencedColumnName = "PRACTITIONER_ID"),
             inverseJoinColumns = @JoinColumn(name = "EXAMINATION_ID", referencedColumnName = "EXAMINATION_ID")
     )
+    @JsonIgnore
     private List<Examination> examinations;
 
 }
