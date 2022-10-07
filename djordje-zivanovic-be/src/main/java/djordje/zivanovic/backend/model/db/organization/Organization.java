@@ -2,6 +2,7 @@ package djordje.zivanovic.backend.model.db.organization;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import djordje.zivanovic.backend.model.db.examination.Examination;
+import djordje.zivanovic.backend.model.db.patient.Patient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -54,5 +55,9 @@ public class Organization {
     @OneToMany(mappedBy = "organization")
     @JsonIgnore
     private List<Examination> examinations;
+
+    @OneToMany(mappedBy = "organization")
+    @JsonIgnore
+    private List<Patient> patients;
 
 }

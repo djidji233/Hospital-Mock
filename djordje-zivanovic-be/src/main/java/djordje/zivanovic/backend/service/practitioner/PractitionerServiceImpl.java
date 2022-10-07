@@ -4,8 +4,11 @@ import djordje.zivanovic.backend.exception.ApiException;
 import djordje.zivanovic.backend.model.api.request.practitioner.PractitionerCreationRequest;
 import djordje.zivanovic.backend.model.api.request.practitioner.PractitionerModificationRequest;
 import djordje.zivanovic.backend.model.db.GenderEnum;
+import djordje.zivanovic.backend.model.db.examination.ExaminationStatusEnum;
 import djordje.zivanovic.backend.model.db.practitioner.Practitioner;
 import djordje.zivanovic.backend.model.db.practitioner.PractitionerQualificationEnum;
+import djordje.zivanovic.backend.repository.ExaminationRepository;
+import djordje.zivanovic.backend.repository.PatientRepository;
 import djordje.zivanovic.backend.repository.PractitionerRepository;
 import djordje.zivanovic.backend.service.organization.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,10 @@ public class PractitionerServiceImpl implements PractitionerService {
     private PractitionerRepository practitionerRepository;
     @Autowired
     private OrganizationService organizationService;
+    @Autowired
+    private ExaminationRepository examinationRepository;
+    @Autowired
+    private PatientRepository patientRepository;
 
     @Override
     public List<Practitioner> findAll(Long organizationId) {
@@ -196,8 +203,31 @@ public class PractitionerServiceImpl implements PractitionerService {
             throw new ApiException(HttpStatus.NOT_FOUND, "practitioner with that id doesn't exist", "delete practitioner");
         });
         Practitioner practitioner = practitionerOpt.get();
-        practitioner.setActive(false);
-        practitionerRepository.save(practitioner);
+        if (practitioner.getExaminations().stream().noneMatch(examination -> examination.getStatus() == ExaminationStatusEnum.IN_PROGRESS)) {
+            practitioner.getExaminations().forEach(
+                    examination -> {
+                        examination.setStatus(ExaminationStatusEnum.SUSPENDED); // suspended until new practitioner is set
+                        List<Practitioner> oldPractitioners = examination.getPractitioners();
+                        oldPractitioners.remove(practitioner);
+                        examination.setPractitioners(oldPractitioners);
+                        examinationRepository.save(examination);
+                    }
+            );
+            practitioner.setExaminations(new ArrayList<>()); // practitioner is the owning side - this way records from joined table are removed
+
+            practitioner.getPatients().forEach(
+                    patient -> {
+                        patient.setPrimaryCareProvider(null);
+                        patientRepository.save(patient);
+                    }
+            );
+            practitioner.setPatients(new ArrayList<>()); // practitioner is the owning side
+
+            practitioner.setActive(false);
+            practitionerRepository.save(practitioner);
+        } else {
+            throw new ApiException(HttpStatus.METHOD_NOT_ALLOWED, "practitioner is performing an examination", "delete practitioner");
+        }
         return null;
     }
 

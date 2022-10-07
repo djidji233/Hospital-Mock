@@ -6,10 +6,7 @@ import djordje.zivanovic.backend.model.api.request.organization.OrganizationModi
 import djordje.zivanovic.backend.model.db.examination.Examination;
 import djordje.zivanovic.backend.model.db.examination.ExaminationStatusEnum;
 import djordje.zivanovic.backend.model.db.organization.Organization;
-import djordje.zivanovic.backend.repository.ExaminationRepository;
-import djordje.zivanovic.backend.repository.OrganizationRepository;
-import djordje.zivanovic.backend.repository.OrganizationTypeRepository;
-import djordje.zivanovic.backend.repository.PractitionerRepository;
+import djordje.zivanovic.backend.repository.*;
 import djordje.zivanovic.backend.service.examination.ExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +27,8 @@ public class OrganizationServiceImpl implements OrganizationService {
     private ExaminationRepository examinationRepository;
     @Autowired
     private PractitionerRepository practitionerRepository;
+    @Autowired
+    private PatientRepository patientRepository;
 
     @Override
     public List<Organization> findAll() {
@@ -156,6 +155,12 @@ public class OrganizationServiceImpl implements OrganizationService {
         if (deleted.getExaminations().stream().noneMatch(examination -> examination.getStatus() == ExaminationStatusEnum.IN_PROGRESS)) {
             deleted.setActive(false);
             organizationRepository.save(deleted);
+            deleted.getPatients().forEach(
+                    patient -> {
+                        patient.setOrganization(null);
+                        patientRepository.save(patient);
+                    }
+            );
             deleted.getExaminations().forEach(examination -> {
                 // remove from joint table because examinations don't exist after organization deletion
                 examination.getPractitioners().forEach(
@@ -163,6 +168,7 @@ public class OrganizationServiceImpl implements OrganizationService {
                             List<Examination> oldExaminations = practitioner.getExaminations();
                             oldExaminations.remove(examination);
                             practitioner.setExaminations(oldExaminations);
+                            practitioner.setOrganization(null);
                             practitionerRepository.save(practitioner);
                         }
                 );

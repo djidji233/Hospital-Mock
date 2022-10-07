@@ -57,7 +57,7 @@ public class Examination {
     @JoinColumn(name = "PATIENT_ID", referencedColumnName = "PATIENT_ID")
     private Patient patient;
 
-    @ManyToMany(mappedBy = "examinations", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "examinations")
     private List<Practitioner> practitioners;
 
 }
