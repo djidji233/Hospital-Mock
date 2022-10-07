@@ -34,7 +34,11 @@ public class PractitionerServiceImpl implements PractitionerService {
                 .filter(Practitioner::getActive)
                 .filter(practitioner -> {
                     if (organizationId != null) {
-                        return practitioner.getOrganization().getOrganizationId().equals(organizationId);
+                        if (practitioner.getOrganization() != null) {
+                            return practitioner.getOrganization().getOrganizationId().equals(organizationId);
+                        } else {
+                            return organizationId == 0; // unassigned
+                        }
                     } else {
                         return true;
                     }
