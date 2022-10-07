@@ -197,16 +197,4 @@ public class PractitionerServiceImpl implements PractitionerService {
         return null;
     }
 
-//    @Override
-//    public List<Practitioner> findAllByOrganizationId(Long organizationId) {
-//        return findAll()
-//                .stream()
-//                .filter(practitioner -> {
-//                    if (practitioner.getOrganization() != null) {
-//                        return practitioner.getOrganization().getOrganizationId().equals(organizationId);
-//                    } else {
-//                        return false;
-//                    }
-//                }).collect(Collectors.toList());
-//    }
 }

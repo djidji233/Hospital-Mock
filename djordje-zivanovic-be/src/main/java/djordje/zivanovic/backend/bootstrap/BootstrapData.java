@@ -15,6 +15,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -141,6 +142,8 @@ public class BootstrapData implements CommandLineRunner {
         examination.setPractitioners(List.of(practitioner));
         examination.setPatient(patient);
         examinationRepository.save(examination);
+        organization.setExaminations(List.of(examination));
+        organizationRepository.save(organization);
 
         practitioner.setExaminations(List.of(examination));
         practitionerRepository.save(practitioner);

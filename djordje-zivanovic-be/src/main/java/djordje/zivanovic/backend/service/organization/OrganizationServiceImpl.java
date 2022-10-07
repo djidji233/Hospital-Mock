@@ -3,9 +3,14 @@ package djordje.zivanovic.backend.service.organization;
 import djordje.zivanovic.backend.exception.ApiException;
 import djordje.zivanovic.backend.model.api.request.organization.OrganizationCreationRequest;
 import djordje.zivanovic.backend.model.api.request.organization.OrganizationModificationRequest;
+import djordje.zivanovic.backend.model.db.examination.Examination;
+import djordje.zivanovic.backend.model.db.examination.ExaminationStatusEnum;
 import djordje.zivanovic.backend.model.db.organization.Organization;
+import djordje.zivanovic.backend.repository.ExaminationRepository;
 import djordje.zivanovic.backend.repository.OrganizationRepository;
 import djordje.zivanovic.backend.repository.OrganizationTypeRepository;
+import djordje.zivanovic.backend.repository.PractitionerRepository;
+import djordje.zivanovic.backend.service.examination.ExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,6 +26,10 @@ public class OrganizationServiceImpl implements OrganizationService {
     private OrganizationRepository organizationRepository;
     @Autowired
     private OrganizationTypeRepository organizationTypeRepository;
+    @Autowired
+    private ExaminationRepository examinationRepository;
+    @Autowired
+    private PractitionerRepository practitionerRepository;
 
     @Override
     public List<Organization> findAll() {
@@ -144,8 +153,25 @@ public class OrganizationServiceImpl implements OrganizationService {
             throw new ApiException(HttpStatus.NOT_FOUND, "organization with that id doesn't exist", "delete organization");
         });
         Organization deleted = organizationOpt.get();
-        deleted.setActive(false);
-        organizationRepository.save(deleted);
+        if (deleted.getExaminations().stream().noneMatch(examination -> examination.getStatus() == ExaminationStatusEnum.IN_PROGRESS)) {
+            deleted.setActive(false);
+            organizationRepository.save(deleted);
+            deleted.getExaminations().forEach(examination -> {
+                // remove from joint table because examinations don't exist after organization deletion
+                examination.getPractitioners().forEach(
+                        practitioner -> {
+                            List<Examination> oldExaminations = practitioner.getExaminations();
+                            oldExaminations.remove(examination);
+                            practitioner.setExaminations(oldExaminations);
+                            practitionerRepository.save(practitioner);
+                        }
+                );
+                examination.setStatus(ExaminationStatusEnum.ENTERED_IN_ERROR);
+                examinationRepository.save(examination);
+            });
+        } else {
+            throw new ApiException(HttpStatus.METHOD_NOT_ALLOWED, "organization has examinations in progress", "delete organization");
+        }
         return null;
     }
 }
