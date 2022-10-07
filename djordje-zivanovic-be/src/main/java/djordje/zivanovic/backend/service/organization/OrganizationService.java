@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrganizationService {
+
     List<Organization> findAll();
+
     Optional<Organization> findById(Long organizationId);
+
     Organization create(OrganizationCreationRequest request);
 
     Organization update(Long organizationId, OrganizationModificationRequest request);

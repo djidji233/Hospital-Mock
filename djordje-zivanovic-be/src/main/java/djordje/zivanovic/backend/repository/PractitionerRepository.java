@@ -8,5 +8,8 @@ import java.util.Optional;
 
 @Repository
 public interface PractitionerRepository extends JpaRepository<Practitioner, Long> {
+
     Optional<Practitioner> findByIdentifier(String identifier);
+
 }
+

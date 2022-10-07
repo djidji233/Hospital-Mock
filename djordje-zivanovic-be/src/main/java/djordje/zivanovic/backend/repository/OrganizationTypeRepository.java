@@ -10,6 +10,8 @@ import java.util.Optional;
 
 @Repository
 public interface OrganizationTypeRepository extends JpaRepository<OrganizationType, Long> {
-    @Query(value = "select * from organization_type where organization_type=:organization_type",nativeQuery = true)
+
+    @Query(value = "select * from organization_type where organization_type=:organization_type", nativeQuery = true)
     Optional<OrganizationType> findByOrganizationType(@Param("organization_type") String organizationType);
+
 }

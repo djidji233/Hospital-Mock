@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class PractitionerServiceImpl implements PractitionerService {
+
     @Autowired
     private PractitionerRepository practitionerRepository;
-
     @Autowired
     private OrganizationService organizationService;
 
@@ -49,7 +49,7 @@ public class PractitionerServiceImpl implements PractitionerService {
             practitionerRepository
                     .findByIdentifier(request.getIdentifier())
                     .ifPresentOrElse(
-                            organization1 -> {
+                            practitioner1 -> {
                                 throw new ApiException(HttpStatus.BAD_REQUEST, "that identifier already exists", "create practitioner");
                             },
                             () -> {
@@ -116,8 +116,8 @@ public class PractitionerServiceImpl implements PractitionerService {
             practitionerRepository
                     .findByIdentifier(request.getIdentifier())
                     .ifPresentOrElse(
-                            organization1 -> {
-                                throw new ApiException(HttpStatus.BAD_REQUEST, "that identifier already exists", "create practitioner");
+                            practitioner1 -> {
+                                throw new ApiException(HttpStatus.BAD_REQUEST, "that identifier already exists", "update practitioner");
                             },
                             () -> {
                                 practitioner.setIdentifier(request.getIdentifier());
@@ -139,7 +139,7 @@ public class PractitionerServiceImpl implements PractitionerService {
                                 .get()
                 );
             } else {
-                throw new ApiException(HttpStatus.BAD_REQUEST, "that gender doesn't exist", "create practitioner");
+                throw new ApiException(HttpStatus.BAD_REQUEST, "that gender doesn't exist", "update practitioner");
             }
         }
         if (request.getBirthDate() != null) {
@@ -163,7 +163,7 @@ public class PractitionerServiceImpl implements PractitionerService {
                                 .get()
                 );
             } else {
-                throw new ApiException(HttpStatus.BAD_REQUEST, "that qualification doesn't exist", "create practitioner");
+                throw new ApiException(HttpStatus.BAD_REQUEST, "that qualification doesn't exist", "update practitioner");
             }
         }
         if (request.getOrganizationId() != null) {
@@ -171,7 +171,7 @@ public class PractitionerServiceImpl implements PractitionerService {
                     .ifPresentOrElse(
                             practitioner::setOrganization,
                             () -> {
-                                throw new ApiException(HttpStatus.BAD_REQUEST, "that organization doesn't exist", "create practitioner");
+                                throw new ApiException(HttpStatus.BAD_REQUEST, "that organization doesn't exist", "update practitioner");
                             }
                     );
         }
@@ -182,7 +182,7 @@ public class PractitionerServiceImpl implements PractitionerService {
     public Void delete(Long practitionerId) {
         Optional<Practitioner> practitionerOpt = findById(practitionerId);
         practitionerOpt.orElseThrow(() -> {
-            throw new ApiException(HttpStatus.NOT_FOUND, "practitioner with that id doesn't exist", "update practitioner");
+            throw new ApiException(HttpStatus.NOT_FOUND, "practitioner with that id doesn't exist", "delete practitioner");
         });
         Practitioner practitioner = practitionerOpt.get();
         practitioner.setActive(false);

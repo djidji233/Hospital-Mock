@@ -24,10 +24,8 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private PatientRepository patientRepository;
-
     @Autowired
     private OrganizationService organizationService;
-
     @Autowired
     private PractitionerService practitionerService;
 
@@ -54,7 +52,7 @@ public class PatientServiceImpl implements PatientService {
             patientRepository
                     .findByIdentifier(request.getIdentifier())
                     .ifPresentOrElse(
-                            organization1 -> {
+                            patient1 -> {
                                 throw new ApiException(HttpStatus.BAD_REQUEST, "that identifier already exists", "create patient");
                             },
                             () -> {
@@ -138,7 +136,7 @@ public class PatientServiceImpl implements PatientService {
             patientRepository
                     .findByIdentifier(request.getIdentifier())
                     .ifPresentOrElse(
-                            organization1 -> {
+                            patient1 -> {
                                 throw new ApiException(HttpStatus.BAD_REQUEST, "that identifier already exists", "update patient");
                             },
                             () -> {
@@ -196,7 +194,7 @@ public class PatientServiceImpl implements PatientService {
                     .ifPresentOrElse(
                             patient::setOrganization,
                             () -> {
-                                throw new ApiException(HttpStatus.BAD_REQUEST, "that organization doesn't exist", "create patient");
+                                throw new ApiException(HttpStatus.BAD_REQUEST, "that organization doesn't exist", "update patient");
                             }
                     );
         }
@@ -207,11 +205,11 @@ public class PatientServiceImpl implements PatientService {
                                 if (practitioner.getQualification() == PractitionerQualificationEnum.DOCTOR_OF_MEDICINE) {
                                     patient.setPrimaryCareProvider(practitioner);
                                 } else {
-                                    throw new ApiException(HttpStatus.BAD_REQUEST, "that practitioner isn't Doctor of Medicine", "create patient");
+                                    throw new ApiException(HttpStatus.BAD_REQUEST, "that practitioner isn't Doctor of Medicine", "update patient");
                                 }
                             },
                             () -> {
-                                throw new ApiException(HttpStatus.BAD_REQUEST, "that practitioner doesn't exist", "create patient");
+                                throw new ApiException(HttpStatus.BAD_REQUEST, "that practitioner doesn't exist", "update patient");
                             }
                     );
         }
@@ -222,7 +220,7 @@ public class PatientServiceImpl implements PatientService {
     public Void delete(Long patientId) {
         Optional<Patient> patientOpt = findById(patientId);
         patientOpt.orElseThrow(() -> {
-            throw new ApiException(HttpStatus.NOT_FOUND, "patient with that id doesn't exist", "update patient");
+            throw new ApiException(HttpStatus.NOT_FOUND, "patient with that id doesn't exist", "delete patient");
         });
         Patient patient = patientOpt.get();
         patient.setActive(false);

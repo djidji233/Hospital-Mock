@@ -8,9 +8,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PatientService {
+
     List<Patient> findAll();
+
     Optional<Patient> findById(Long patientId);
+
     Patient create(PatientCreationRequest request);
+
     Patient update(Long patientId, PatientModificationRequest request);
+
     Void delete(Long patientId);
+
 }

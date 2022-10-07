@@ -28,16 +28,12 @@ public class ExaminationServiceImpl implements ExaminationService {
 
     @Autowired
     private ExaminationRepository examinationRepository;
-
     @Autowired
     private ServiceTypeRepository serviceTypeRepository;
-
     @Autowired
     private OrganizationService organizationService;
-
     @Autowired
     private PatientService patientService;
-
     @Autowired
     private PractitionerService practitionerService;
     @Autowired
@@ -66,7 +62,7 @@ public class ExaminationServiceImpl implements ExaminationService {
             examinationRepository
                     .findByIdentifier(request.getIdentifier())
                     .ifPresentOrElse(
-                            organization1 -> {//TODO: edit to correct type everywhere
+                            examination1 -> {
                                 throw new ApiException(HttpStatus.BAD_REQUEST, "that identifier already exists", "create examination");
                             },
                             () -> {
@@ -167,7 +163,7 @@ public class ExaminationServiceImpl implements ExaminationService {
             examinationRepository
                     .findByIdentifier(request.getIdentifier())
                     .ifPresentOrElse(
-                            organization1 -> {//TODO: edit to correct type everywhere
+                            examination1 -> {
                                 throw new ApiException(HttpStatus.BAD_REQUEST, "that identifier already exists", "update examination");
                             },
                             () -> {

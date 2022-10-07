@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ExaminationService {
+
     List<Examination> findAll();
 
     Optional<Examination> findById(Long examinationId);
@@ -17,4 +18,5 @@ public interface ExaminationService {
     Examination update(Long examinationId, ExaminationModificationRequest request);
 
     Void delete(Long examinationId);
+
 }

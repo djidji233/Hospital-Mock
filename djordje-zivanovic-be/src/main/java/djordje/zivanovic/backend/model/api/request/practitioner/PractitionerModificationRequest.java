@@ -13,6 +13,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PractitionerModificationRequest {
+
     @Size(min = 5, message = "Minimal number of characters is 5")
     private String identifier;
 
@@ -38,4 +39,5 @@ public class PractitionerModificationRequest {
     private String qualification;
 
     private Long organizationId;
+
 }

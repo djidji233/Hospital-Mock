@@ -15,6 +15,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientModificationRequest {
+
     @Size(min = 5, message = "Minimal number of characters is 5")
     private String identifier;
 
@@ -44,4 +45,5 @@ public class PatientModificationRequest {
     private Long organizationId;
 
     private Long primaryCareProviderId;
+
 }

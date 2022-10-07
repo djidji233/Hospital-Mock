@@ -13,15 +13,22 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrganizationCreationRequest {
+
     @Size(min = 5, message = "Minimal number of characters is 5")
     private String identifier;
+
     @NotBlank(message = "Type is mandatory")
     private String type;
+
     @NotBlank(message = "Name is mandatory")
     @Size(min = 5, message = "Minimal number of characters is 5")
     private String name;
+
     private String address;
+
     private String phone;
+
     @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", flags = Pattern.Flag.CASE_INSENSITIVE)
     private String email;
+
 }

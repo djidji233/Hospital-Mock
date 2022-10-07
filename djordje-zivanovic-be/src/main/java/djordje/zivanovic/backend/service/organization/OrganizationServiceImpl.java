@@ -19,7 +19,6 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Autowired
     private OrganizationRepository organizationRepository;
-
     @Autowired
     private OrganizationTypeRepository organizationTypeRepository;
 
@@ -97,7 +96,7 @@ public class OrganizationServiceImpl implements OrganizationService {
                     .findByIdentifier(request.getIdentifier())
                     .ifPresentOrElse(
                             organization1 -> {
-                                throw new ApiException(HttpStatus.BAD_REQUEST, "that identifier already exists", "create organization");
+                                throw new ApiException(HttpStatus.BAD_REQUEST, "that identifier already exists", "update organization");
                             },
                             () -> {
                                 updated.setIdentifier(request.getIdentifier());
@@ -110,7 +109,7 @@ public class OrganizationServiceImpl implements OrganizationService {
                     .ifPresentOrElse(
                             updated::setType,
                             () -> {
-                                throw new ApiException(HttpStatus.BAD_REQUEST, "that type doesn't exist", "create organization");
+                                throw new ApiException(HttpStatus.BAD_REQUEST, "that type doesn't exist", "update organization");
                             }
                     );
         }
@@ -119,7 +118,7 @@ public class OrganizationServiceImpl implements OrganizationService {
                     .findByName(request.getName())
                     .ifPresentOrElse(
                             organization1 -> {
-                                throw new ApiException(HttpStatus.BAD_REQUEST, "that name already exists", "create organization");
+                                throw new ApiException(HttpStatus.BAD_REQUEST, "that name already exists", "update organization");
                             },
                             () -> {
                                 updated.setName(request.getName());
@@ -142,7 +141,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     public Void delete(Long organizationId) {
         Optional<Organization> organizationOpt = findById(organizationId);
         organizationOpt.orElseThrow(() -> {
-            throw new ApiException(HttpStatus.NOT_FOUND, "organization with that id doesn't exist", "update organization");
+            throw new ApiException(HttpStatus.NOT_FOUND, "organization with that id doesn't exist", "delete organization");
         });
         Organization deleted = organizationOpt.get();
         deleted.setActive(false);
