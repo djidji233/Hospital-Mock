@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface ExaminationService {
 
-    List<Examination> findAll();
+    List<Examination> findAll(Long organizationId, Boolean inProgress);
 
     Optional<Examination> findById(Long examinationId);
 

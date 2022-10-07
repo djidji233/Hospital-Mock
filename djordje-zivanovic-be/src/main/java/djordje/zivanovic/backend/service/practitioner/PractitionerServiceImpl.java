@@ -27,11 +27,18 @@ public class PractitionerServiceImpl implements PractitionerService {
     private OrganizationService organizationService;
 
     @Override
-    public List<Practitioner> findAll() {
+    public List<Practitioner> findAll(Long organizationId) {
         return practitionerRepository
                 .findAll()
                 .stream()
                 .filter(Practitioner::getActive)
+                .filter(practitioner -> {
+                    if (organizationId != null) {
+                        return practitioner.getOrganization().getOrganizationId().equals(organizationId);
+                    } else {
+                        return true;
+                    }
+                })
                 .collect(Collectors.toList());
     }
 
@@ -189,4 +196,17 @@ public class PractitionerServiceImpl implements PractitionerService {
         practitionerRepository.save(practitioner);
         return null;
     }
+
+//    @Override
+//    public List<Practitioner> findAllByOrganizationId(Long organizationId) {
+//        return findAll()
+//                .stream()
+//                .filter(practitioner -> {
+//                    if (practitioner.getOrganization() != null) {
+//                        return practitioner.getOrganization().getOrganizationId().equals(organizationId);
+//                    } else {
+//                        return false;
+//                    }
+//                }).collect(Collectors.toList());
+//    }
 }

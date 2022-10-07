@@ -21,8 +21,8 @@ public class PractitionerController {
     private PractitionerService practitionerService;
 
     @GetMapping
-    public ResponseEntity<List<Practitioner>> getAllPractitioners() {
-        return ResponseEntity.ok(practitionerService.findAll());
+    public ResponseEntity<List<Practitioner>> getAllPractitioners(@RequestParam(required = false) Long organizationId) {
+        return ResponseEntity.ok(practitionerService.findAll(organizationId));
     }
 
     @GetMapping("/{practitionerId}")

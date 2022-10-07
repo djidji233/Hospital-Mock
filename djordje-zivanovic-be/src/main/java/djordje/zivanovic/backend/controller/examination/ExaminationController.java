@@ -21,8 +21,9 @@ public class ExaminationController {
     private ExaminationService examinationService;
 
     @GetMapping
-    public ResponseEntity<List<Examination>> getAllExaminations() {
-        return ResponseEntity.ok(examinationService.findAll());
+    public ResponseEntity<List<Examination>> getAllExaminations(@RequestParam(required = false) Long organizationId,
+                                                                @RequestParam(required = false) Boolean inProgress) {
+        return ResponseEntity.ok(examinationService.findAll(organizationId, inProgress));
     }
 
     @GetMapping("/{examinationId}")

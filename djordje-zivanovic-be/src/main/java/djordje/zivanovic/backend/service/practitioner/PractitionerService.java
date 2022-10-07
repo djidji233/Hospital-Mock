@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface PractitionerService {
 
-    List<Practitioner> findAll();
+    List<Practitioner> findAll(Long organizationId);
 
     Optional<Practitioner> findById(Long practitionerId);
 

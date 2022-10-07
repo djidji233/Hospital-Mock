@@ -40,11 +40,26 @@ public class ExaminationServiceImpl implements ExaminationService {
     private PractitionerRepository practitionerRepository;
 
     @Override
-    public List<Examination> findAll() {
+    public List<Examination> findAll(Long organizationId, Boolean inProgress) {
         return examinationRepository
                 .findAll()
                 .stream()
                 .filter(examination -> examination.getStatus() != ExaminationStatusEnum.ENTERED_IN_ERROR)
+                .filter(examination -> {
+                    if (organizationId != null) {
+                        if (inProgress != null) {
+                            if (inProgress) {
+                                return examination.getOrganization().getOrganizationId().equals(organizationId) && examination.getStatus() == ExaminationStatusEnum.IN_PROGRESS;
+                            } else {
+                                return examination.getOrganization().getOrganizationId().equals(organizationId) && examination.getStatus() == ExaminationStatusEnum.FINISHED;
+                            }
+                        } else {
+                            return examination.getOrganization().getOrganizationId().equals(organizationId);
+                        }
+                    } else {
+                        return true;
+                    }
+                })
                 .collect(Collectors.toList());
     }
 
