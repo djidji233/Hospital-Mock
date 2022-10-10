@@ -8,9 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.lang.module.FindException;
 import java.sql.Date;
 import java.util.List;
 
@@ -59,7 +57,7 @@ public class Examination {
     @JoinColumn(name = "PATIENT_ID", referencedColumnName = "PATIENT_ID")
     private Patient patient;
 
-    @ManyToMany(mappedBy = "examinations", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "examinations")
     private List<Practitioner> practitioners;
 
 }
