@@ -8,6 +8,10 @@ import { PractitionerComponent } from './components/practitioner/practitioner.co
 import { PatientComponent } from './components/patient/patient.component';
 import { ExaminationComponent } from './components/examination/examination.component';
 
+import { HttpClientModule } from "@angular/common/http";
+
+import { FormsModule } from "@angular/forms";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +22,9 @@ import { ExaminationComponent } from './components/examination/examination.compo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

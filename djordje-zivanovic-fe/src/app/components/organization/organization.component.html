@@ -1,1 +1,25 @@
-<p>organization works!</p>
+<div class="col-sm-4">
+    <h1>Organizations</h1>
+    <table>
+        <tr>
+            <th>Identifier</th>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th><input type="button" (click)="createOrganization()" value="Create"></th>
+        </tr>
+        <tr *ngFor="let organization of organizations">
+            <td>{{organization.identifier}}</td>
+            <td>{{organization.type.organizationType}}</td>
+            <td>{{organization.name}}</td>
+            <td>{{organization.address}}</td>
+            <td>{{organization.phone}}</td>
+            <td>{{organization.email}}</td>
+            <td><input type="button" (click)="editOrganization(organization.organizationId)" value="Details"></td>
+            <td><input type="button" (click)="editOrganization(organization.organizationId)" value="Edit"></td>
+            <td><input type="button" (click)="deleteOrganization(organization.organizationId)" value="Delete"></td>
+        </tr>
+    </table>
+</div>
