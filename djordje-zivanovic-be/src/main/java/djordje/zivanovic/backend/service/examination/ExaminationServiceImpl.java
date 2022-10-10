@@ -40,27 +40,50 @@ public class ExaminationServiceImpl implements ExaminationService {
     private PractitionerRepository practitionerRepository;
 
     @Override
-    public List<Examination> findAll(Long organizationId, Boolean inProgress) {
-        return examinationRepository
-                .findAll()
-                .stream()
-                .filter(examination -> examination.getStatus() != ExaminationStatusEnum.ENTERED_IN_ERROR)
-                .filter(examination -> {
-                    if (organizationId != null) {
-                        if (inProgress != null) {
-                            if (inProgress) {
-                                return examination.getOrganization().getOrganizationId().equals(organizationId) && examination.getStatus() == ExaminationStatusEnum.IN_PROGRESS;
-                            } else {
-                                return examination.getOrganization().getOrganizationId().equals(organizationId) && examination.getStatus() == ExaminationStatusEnum.FINISHED;
-                            }
-                        } else {
+    public List<Examination> findAll(Long organizationId, ExaminationStatusEnum status, ExaminationPriorityEnum priority, Long practitionerId, Long patientId) {
+        if (organizationId == null && status == null && priority == null && practitionerId == null && patientId == null) {
+            return new ArrayList<>();
+        } else {
+            return examinationRepository
+                    .findAll()
+                    .stream()
+                    .filter(examination -> {
+                        if (organizationId != null && examination.getOrganization() != null) {
                             return examination.getOrganization().getOrganizationId().equals(organizationId);
+                        } else {
+                            return true;
                         }
-                    } else {
-                        return true;
-                    }
-                })
-                .collect(Collectors.toList());
+                    })
+                    .filter(examination -> {
+                        if (status != null) {
+                            return examination.getStatus() == status;
+                        } else {
+                            return true;
+                        }
+                    })
+                    .filter(examination -> {
+                        if (priority != null) {
+                            return examination.getPriority() == priority;
+                        } else {
+                            return true;
+                        }
+                    })
+                    .filter(examination -> {
+                        if (practitionerId != null && !examination.getPractitioners().isEmpty()) {
+                            return examination.getPractitioners().stream().anyMatch(practitioner -> practitioner.getPractitionerId().equals(practitionerId));
+                        } else {
+                            return true;
+                        }
+                    })
+                    .filter(examination -> {
+                        if (patientId != null && examination.getPatient() != null) {
+                            return examination.getPatient().getPatientId().equals(patientId);
+                        } else {
+                            return true;
+                        }
+                    })
+                    .collect(Collectors.toList());
+        }
     }
 
     @Override
