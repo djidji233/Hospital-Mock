@@ -5,15 +5,24 @@ import djordje.zivanovic.backend.model.api.request.patient.PatientCreationReques
 import djordje.zivanovic.backend.model.api.request.patient.PatientModificationRequest;
 import djordje.zivanovic.backend.model.db.GenderEnum;
 import djordje.zivanovic.backend.model.db.MaritalStatusEnum;
+import djordje.zivanovic.backend.model.db.examination.Examination;
+import djordje.zivanovic.backend.model.db.examination.ExaminationStatusEnum;
+import djordje.zivanovic.backend.model.db.organization.Organization;
 import djordje.zivanovic.backend.model.db.patient.Patient;
+import djordje.zivanovic.backend.model.db.practitioner.Practitioner;
 import djordje.zivanovic.backend.model.db.practitioner.PractitionerQualificationEnum;
+import djordje.zivanovic.backend.repository.ExaminationRepository;
+import djordje.zivanovic.backend.repository.OrganizationRepository;
 import djordje.zivanovic.backend.repository.PatientRepository;
+import djordje.zivanovic.backend.repository.PractitionerRepository;
+import djordje.zivanovic.backend.service.examination.ExaminationService;
 import djordje.zivanovic.backend.service.organization.OrganizationService;
 import djordje.zivanovic.backend.service.practitioner.PractitionerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +37,12 @@ public class PatientServiceImpl implements PatientService {
     private OrganizationService organizationService;
     @Autowired
     private PractitionerService practitionerService;
+    @Autowired
+    private OrganizationRepository organizationRepository;
+    @Autowired
+    private PractitionerRepository practitionerRepository;
+    @Autowired
+    private ExaminationRepository examinationRepository;
 
     @Override
     public List<Patient> findAll() {
@@ -223,8 +238,43 @@ public class PatientServiceImpl implements PatientService {
             throw new ApiException(HttpStatus.NOT_FOUND, "patient with that id doesn't exist", "delete patient");
         });
         Patient patient = patientOpt.get();
-        patient.setActive(false);
-        patientRepository.save(patient);
+        if (patient.getExaminations().stream().noneMatch(examination -> examination.getStatus() == ExaminationStatusEnum.IN_PROGRESS)) {
+            // remove from organization
+            if (patient.getOrganization() != null) {
+                Organization organization = patient.getOrganization();
+                List<Patient> oldPatients = organization.getPatients();
+                oldPatients.remove(patient);
+                organization.setPatients(oldPatients);
+                organizationRepository.save(organization);
+            }
+            // remove from practitioner
+            if (patient.getPrimaryCareProvider() != null) {
+                Practitioner practitioner = patient.getPrimaryCareProvider();
+                List<Patient> oldPatients = practitioner.getPatients();
+                oldPatients.remove(patient);
+                practitioner.setPatients(oldPatients);
+                practitionerRepository.save(practitioner);
+            }
+            // remove all examinations of patient
+            patient.getExaminations().forEach(
+                    examination -> {
+                        examination.getPractitioners().forEach(
+                                practitioner -> {
+                                    List<Examination> oldExaminations = practitioner.getExaminations();
+                                    oldExaminations.remove(examination);
+                                    practitioner.setExaminations(oldExaminations);
+                                    practitionerRepository.save(practitioner);
+                                }
+                        );
+                        examination.setStatus(ExaminationStatusEnum.ENTERED_IN_ERROR);
+                        examinationRepository.save(examination);
+                    }
+            );
+            patient.setActive(false);
+            patientRepository.save(patient);
+        } else {
+            throw new ApiException(HttpStatus.METHOD_NOT_ALLOWED, "patient has running examinations", "delete patient");
+        }
         return null;
     }
 }
