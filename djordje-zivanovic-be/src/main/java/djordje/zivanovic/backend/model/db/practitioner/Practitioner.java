@@ -1,5 +1,6 @@
 package djordje.zivanovic.backend.model.db.practitioner;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import djordje.zivanovic.backend.model.db.GenderEnum;
 import djordje.zivanovic.backend.model.db.examination.Examination;
 import djordje.zivanovic.backend.model.db.organization.Organization;
@@ -70,12 +71,17 @@ public class Practitioner {
     @JoinColumn(name = "ORGANIZATION_ID", referencedColumnName = "ORGANIZATION_ID")
     private Organization organization;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "primaryCareProvider")
+    @JsonIgnore
+    private List<Patient> patients;
+
+    @ManyToMany
     @JoinTable(
             name = "PRACTITIONER_EXAMINATION",
             joinColumns = @JoinColumn(name = "PRACTITIONER_ID", referencedColumnName = "PRACTITIONER_ID"),
             inverseJoinColumns = @JoinColumn(name = "EXAMINATION_ID", referencedColumnName = "EXAMINATION_ID")
     )
+    @JsonIgnore
     private List<Examination> examinations;
 
 }

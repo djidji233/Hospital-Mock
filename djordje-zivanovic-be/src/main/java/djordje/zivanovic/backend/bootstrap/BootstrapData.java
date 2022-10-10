@@ -86,6 +86,20 @@ public class BootstrapData implements CommandLineRunner {
         serviceType.setServiceTypeId(1L);
         serviceType.setServiceType(ServiceTypeEnum.CARDIOLOGY);
         serviceTypeRepository.save(serviceType);
+        serviceTypeRepository.save(new ServiceType(2L, ServiceTypeEnum.GENERAL));
+        serviceTypeRepository.save(new ServiceType(3L, ServiceTypeEnum.INTENSIVE_CARE));
+        serviceTypeRepository.save(new ServiceType(4L, ServiceTypeEnum.ENDOCRINOLOGY));
+        serviceTypeRepository.save(new ServiceType(5L, ServiceTypeEnum.GYNECOLOGY));
+        serviceTypeRepository.save(new ServiceType(6L, ServiceTypeEnum.GASTROENTEROLOGY));
+        serviceTypeRepository.save(new ServiceType(7L, ServiceTypeEnum.HEMATOLOGY));
+        serviceTypeRepository.save(new ServiceType(8L, ServiceTypeEnum.NEUROLOGY));
+        serviceTypeRepository.save(new ServiceType(9L, ServiceTypeEnum.ONCOLOGY));
+        serviceTypeRepository.save(new ServiceType(10L, ServiceTypeEnum.PEDIATRICS));
+        serviceTypeRepository.save(new ServiceType(11L, ServiceTypeEnum.PULMONOLOGY));
+        serviceTypeRepository.save(new ServiceType(12L, ServiceTypeEnum.RADIOLOGY));
+        serviceTypeRepository.save(new ServiceType(13L, ServiceTypeEnum.OPHTHALMOLOGY));
+        serviceTypeRepository.save(new ServiceType(142L, ServiceTypeEnum.OTOLARYNGOLOGY));
+        serviceTypeRepository.save(new ServiceType(15L, ServiceTypeEnum.SURGERY));
 
         examination.setServiceType(serviceType);
         examination.setPriority(ExaminationPriorityEnum.ROUTINE);
@@ -103,6 +117,10 @@ public class BootstrapData implements CommandLineRunner {
         organizationType.setOrganizationTypeId(1L);
         organizationType.setOrganizationType(OrganizationTypeEnum.HOSPITAL);
         organizationTypeRepository.save(organizationType);
+        organizationTypeRepository.save(new OrganizationType(2L,OrganizationTypeEnum.INSURANCE_COMPANY));
+        organizationTypeRepository.save(new OrganizationType(3L, OrganizationTypeEnum.EDUCATIONAL_INSTITUTE));
+        organizationTypeRepository.save(new OrganizationType(4L, OrganizationTypeEnum.CLINICAL_RESEARCH));
+        organizationTypeRepository.save(new OrganizationType(5L, OrganizationTypeEnum.OTHER));
 
         organization.setType(organizationType);
         organization.setName("Organization 1");
@@ -119,13 +137,18 @@ public class BootstrapData implements CommandLineRunner {
         patient.setOrganization(organization);
         patient.setPrimaryCareProvider(practitioner);
         patientRepository.save(patient);
+        organization.setPatients(List.of(patient));
+        organizationRepository.save(organization);
 
         examination.setOrganization(organization);
         examination.setPractitioners(List.of(practitioner));
         examination.setPatient(patient);
         examinationRepository.save(examination);
+        organization.setExaminations(List.of(examination));
+        organizationRepository.save(organization);
 
         practitioner.setExaminations(List.of(examination));
+        practitioner.setPatients(List.of(patient));
         practitionerRepository.save(practitioner);
 
         System.out.println("Data loaded!");

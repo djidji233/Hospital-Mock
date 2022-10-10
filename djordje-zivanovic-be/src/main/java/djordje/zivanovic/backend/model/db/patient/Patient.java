@@ -1,5 +1,6 @@
 package djordje.zivanovic.backend.model.db.patient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import djordje.zivanovic.backend.model.db.GenderEnum;
 import djordje.zivanovic.backend.model.db.MaritalStatusEnum;
 import djordje.zivanovic.backend.model.db.examination.Examination;
@@ -74,5 +75,9 @@ public class Patient {
     @ManyToOne
     @JoinColumn(name = "PRACTITIONER_ID", referencedColumnName = "PRACTITIONER_ID")
     private Practitioner primaryCareProvider;
+
+    @OneToMany(mappedBy = "patient")
+    @JsonIgnore
+    private List<Examination> examinations;
 
 }
