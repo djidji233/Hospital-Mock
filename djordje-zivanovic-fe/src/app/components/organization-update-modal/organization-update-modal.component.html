@@ -1,0 +1,62 @@
+<h2 mat-dialog-title>Create organization</h2>
+<mat-dialog-content class="mat-typography">
+
+    <form>
+        <div class="row">
+            <div class="col">
+                <label>Identifier:</label>
+            </div>
+            <div class="col">
+                <input type="text" name="identifier" [(ngModel)]="request.identifier" value="{{organization.identifier}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Type:</label>
+            </div>
+            <div class="col">
+                <select name="type" [(ngModel)]="request.type">
+                    <option *ngFor="let type of organizationTypes" [selected]="type === organization.type.organizationType">
+                        {{type}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Name:</label>
+            </div>
+            <div class="col">
+                <input type="text" name="name" [(ngModel)]="request.name" value="{{organization.name}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Address:</label>
+            </div>
+            <div class="col">
+                <input type="text" name="address" [(ngModel)]="request.address" value="{{organization.address}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Phone:</label>
+            </div>
+            <div class="col">
+                <input type="text" name="phone" [(ngModel)]="request.phone" value="{{organization.phone}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Email:</label>
+            </div>
+            <div class="col">
+                <input type="email" name="email" [(ngModel)]="request.email" value="{{organization.email}}"><br>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close (click)="cancel()">Cancel</button>
+    <button mat-button cdkFocusInitial (click)="updateOrganization()">Update</button>
+</mat-dialog-actions>

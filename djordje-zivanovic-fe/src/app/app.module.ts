@@ -15,6 +15,7 @@ import { OrganizationDetailsModalComponent } from './components/organization-det
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrganizationCreateModalComponent } from './components/organization-create-modal/organization-create-modal.component';
+import { OrganizationUpdateModalComponent } from './components/organization-update-modal/organization-update-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { OrganizationCreateModalComponent } from './components/organization-crea
     PatientComponent,
     ExaminationComponent,
     OrganizationDetailsModalComponent,
-    OrganizationCreateModalComponent
+    OrganizationCreateModalComponent,
+    OrganizationUpdateModalComponent
   ],
   imports: [
     BrowserModule,

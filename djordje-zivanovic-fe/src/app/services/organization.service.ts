@@ -1,6 +1,6 @@
 import { Injectable, resolveForwardRef } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Organization, OrganizationCreationRequest } from '../models/organization.model';
+import { Organization, OrganizationCreationModificationRequest } from '../models/organization.model';
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 
 
@@ -42,10 +42,24 @@ export class OrganizationService {
     )
   }
 
-  public createOrganization(request: OrganizationCreationRequest): Observable<Organization> {
+  public createOrganization(request: OrganizationCreationModificationRequest): Observable<Organization> {
     const body = JSON.stringify(request)
     return this.http.post<Organization>(
       this.organizationUrl,
+      body,
+      {
+        params: {},
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+  }
+
+  public updateOrganization(organizationId: number, request: OrganizationCreationModificationRequest): Observable<Organization> {
+    const body = JSON.stringify(request)
+    return this.http.patch<Organization>(
+      this.organizationUrl + organizationId,
       body,
       {
         params: {},

@@ -22,7 +22,7 @@ export enum OrganizationTypeEnum {
     OTHER = "Other"
 }
 
-export class OrganizationCreationRequest {
+export class OrganizationCreationModificationRequest {
     identifier: string;
     type: string;
     name: string;

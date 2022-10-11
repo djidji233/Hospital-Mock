@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Organization, OrganizationCreationRequest, OrganizationTypeEnum } from 'src/app/models/organization.model';
+import { Organization, OrganizationCreationModificationRequest, OrganizationTypeEnum } from 'src/app/models/organization.model';
 import { OrganizationService } from 'src/app/services/organization.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -12,11 +12,11 @@ export class OrganizationCreateModalComponent implements OnInit {
 
   organizationTypeEnum = OrganizationTypeEnum;
   @Input() organizationTypes: string[] = []
-  request: OrganizationCreationRequest;
+  request: OrganizationCreationModificationRequest;
   newOrganization: Organization;
 
   constructor(private organizationService: OrganizationService, private dialogRef: MatDialogRef<OrganizationCreateModalComponent>) {
-    this.request = new OrganizationCreationRequest();
+    this.request = new OrganizationCreationModificationRequest();
     this.newOrganization = {} as Organization;
     this.organizationTypes = Object.keys(this.organizationTypeEnum)
   }
@@ -25,7 +25,7 @@ export class OrganizationCreateModalComponent implements OnInit {
   }
 
   cancel() {
-    this.request = new OrganizationCreationRequest();
+    this.request = new OrganizationCreationModificationRequest();
   }
 
   createOrganization() {
@@ -33,7 +33,7 @@ export class OrganizationCreateModalComponent implements OnInit {
       .subscribe(
         (res) => {
           this.dialogRef.close()
-          console.log('New organization: \n' + res)
+          console.log('New organization created!')
           this.newOrganization = res;
         },
         (error) => {
