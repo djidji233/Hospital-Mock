@@ -23,12 +23,12 @@ export enum OrganizationTypeEnum {
 }
 
 export class OrganizationCreationModificationRequest {
-    identifier: string;
-    type: string;
-    name: string;
-    address: string;
-    phone: string;
-    email: string;
+    identifier: string | undefined;
+    type: string | undefined;
+    name: string | undefined;
+    address: string | undefined;
+    phone: string | undefined;
+    email: string | undefined;
 
     constructor() {
         this.identifier = ''
