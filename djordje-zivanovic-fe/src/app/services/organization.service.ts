@@ -70,4 +70,10 @@ export class OrganizationService {
     )
   }
 
+  public deleteOrganization(organizationId: number): Observable<any> {
+    return this.http.delete<any>(
+      this.organizationUrl + organizationId
+    )
+  }
+
 }

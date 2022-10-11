@@ -44,9 +44,14 @@ export class OrganizationComponent implements OnInit {
       .subscribe(() => this.fetchOrganizations())
   }
 
-  deleteModal(organizationId: number) {
-    //TODO
-    console.log('delete organization')
+  deleteModal(organizationId: number, organizationName: string) {
+    if (confirm('Are you sure you want to delete organization: ' + organizationName)) {
+      this.organizationService.deleteOrganization(organizationId)
+        .subscribe(
+          (res) => this.fetchOrganizations(),
+          (error) => alert('Unable to delete organization')
+        )
+    }
   }
 
   createModal() {

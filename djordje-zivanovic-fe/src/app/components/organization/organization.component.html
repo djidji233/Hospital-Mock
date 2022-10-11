@@ -13,7 +13,7 @@
             <td>{{organization.name}}</td>
             <td><input type="button" (click)="detailsModal(organization.organizationId)" value="Details"></td>
             <td><input type="button" (click)="editModal(organization.organizationId)" value="Edit"></td>
-            <td><input type="button" (click)="deleteModal(organization.organizationId)" value="Delete"></td>
+            <td><input type="button" (click)="deleteModal(organization.organizationId, organization.name)" value="Delete"></td>
         </tr>
     </table>
 </div>
