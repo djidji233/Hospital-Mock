@@ -1,0 +1,19 @@
+<div class="col-sm-4">
+    <h1>Organizations</h1>
+    <table>
+        <tr>
+            <th>Identifier</th>
+            <th>Type</th>
+            <th>Name</th>
+            <th><input type="button" (click)="createModal()" value="Create"></th>
+        </tr>
+        <tr *ngFor="let organization of organizations">
+            <td>{{organization.identifier}}</td>
+            <td>{{organization.type.organizationType}}</td>
+            <td>{{organization.name}}</td>
+            <td><input type="button" (click)="detailsModal(organization.organizationId)" value="Details"></td>
+            <td><input type="button" (click)="editModal(organization.organizationId)" value="Edit"></td>
+            <td><input type="button" (click)="deleteModal(organization.organizationId, organization.name)" value="Delete"></td>
+        </tr>
+    </table>
+</div>

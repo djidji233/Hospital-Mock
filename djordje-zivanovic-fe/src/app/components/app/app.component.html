@@ -1,0 +1,19 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand">Mock Hospital</a>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a [routerLink]="'/organization'" class="nav-link active" aria-current="page">Organization</a>
+          <a [routerLink]="'/practitioner'" class="nav-link active" aria-current="page">Practitioner</a>
+          <a [routerLink]="'/patient'" class="nav-link active" aria-current="page">Patient</a>
+          <a [routerLink]="'/examination'" class="nav-link active" aria-current="page">Examination</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="container pt-3">
+  <router-outlet></router-outlet>
+</div>
