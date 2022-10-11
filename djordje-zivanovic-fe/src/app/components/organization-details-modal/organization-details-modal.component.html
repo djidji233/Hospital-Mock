@@ -1,0 +1,73 @@
+<h2 mat-dialog-title>Organization</h2>
+<mat-dialog-content class="mat-typography">
+
+  <form>
+    <div class="row">
+      <div class="col">
+        <label>Database ID:</label>
+      </div>
+      <div class="col">
+        <input type="text" disabled="true" value="{{organization.organizationId}}"><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>Identifier:</label>
+      </div>
+      <div class="col">
+        <input type="text" disabled="true" value="{{organization.identifier}}"><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>Active:</label>
+      </div>
+      <div class="col">
+        <input type="text" disabled="true" value="{{organization.active}}"><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>Type:</label>
+      </div>
+      <div class="col">
+        <input type="text" disabled="true" value="{{organization.type.organizationType}}"><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>Name:</label>
+      </div>
+      <div class="col">
+        <input type="text" disabled="true" value="{{organization.name}}"><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>Address:</label>
+      </div>
+      <div class="col">
+        <input type="text" disabled="true" value="{{organization.address}}"><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>Phone:</label>
+      </div>
+      <div class="col">
+        <input type="text" disabled="true" value="{{organization.phone}}"><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>Email:</label>
+      </div>
+      <div class="col">
+        <input type="text" disabled="true" value="{{organization.email}}"><br>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

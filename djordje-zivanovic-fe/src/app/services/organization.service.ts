@@ -8,7 +8,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 })
 export class OrganizationService {
 
-  private readonly organizationUrl = 'http://localhost:8080/organization'
+  private readonly organizationUrl = 'http://localhost:8080/organization/'
   private organizations: Observable<Organization[]>
 
   constructor(private http: HttpClient) {
@@ -28,6 +28,16 @@ export class OrganizationService {
       }
     )
     return this.organizations;
+  }
+
+  public fetchOrganizationById(organizationId: number): Observable<Organization> {
+    return this.http.get<Organization>(
+      this.organizationUrl+organizationId,
+      {
+        params: {},
+        headers: {}
+      }
+    )
   }
 
 }

@@ -11,6 +11,9 @@ import { ExaminationComponent } from './components/examination/examination.compo
 import { HttpClientModule } from "@angular/common/http";
 
 import { FormsModule } from "@angular/forms";
+import { OrganizationDetailsModalComponent } from './components/organization-details-modal/organization-details-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,15 +21,19 @@ import { FormsModule } from "@angular/forms";
     OrganizationComponent,
     PractitionerComponent,
     PatientComponent,
-    ExaminationComponent
+    ExaminationComponent,
+    OrganizationDetailsModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [OrganizationDetailsModalComponent]
 })
 export class AppModule { }

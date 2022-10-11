@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Organization } from 'src/app/models/organization.model';
 import { OrganizationService } from 'src/app/services/organization.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { OrganizationDetailsModalComponent } from '../organization-details-modal/organization-details-modal.component';
 
 @Component({
   selector: 'app-organization',
@@ -12,7 +14,7 @@ export class OrganizationComponent implements OnInit {
 
   organizations: Organization[]
 
-  constructor(private organizationService: OrganizationService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private organizationService: OrganizationService, private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog) {
     this.organizations = []
   }
 
@@ -24,22 +26,21 @@ export class OrganizationComponent implements OnInit {
     )
   }
 
-  getOrganizationDetails(organizationId: number) {
-    //TODO
-    console.log('organization details')
+  detailsModal(organizationId: number) {
+    this.dialog.open(OrganizationDetailsModalComponent, { data: { id: organizationId } });
   }
 
-  editOrganization(organizationId: number) {
+  editModal(organizationId: number) {
     //TODO
     console.log('edit organization')
   }
 
-  deleteOrganization(organizationId: number) {
+  deleteModal(organizationId: number) {
     //TODO
     console.log('delete organization')
   }
 
-  createOrganization() {
+  createModal() {
     //TODO
     console.log('create organization')
   }

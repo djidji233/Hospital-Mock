@@ -5,21 +5,15 @@
             <th>Identifier</th>
             <th>Type</th>
             <th>Name</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th><input type="button" (click)="createOrganization()" value="Create"></th>
+            <th><input type="button" (click)="createModal()" value="Create"></th>
         </tr>
         <tr *ngFor="let organization of organizations">
             <td>{{organization.identifier}}</td>
             <td>{{organization.type.organizationType}}</td>
             <td>{{organization.name}}</td>
-            <td>{{organization.address}}</td>
-            <td>{{organization.phone}}</td>
-            <td>{{organization.email}}</td>
-            <td><input type="button" (click)="editOrganization(organization.organizationId)" value="Details"></td>
-            <td><input type="button" (click)="editOrganization(organization.organizationId)" value="Edit"></td>
-            <td><input type="button" (click)="deleteOrganization(organization.organizationId)" value="Delete"></td>
+            <td><input type="button" (click)="detailsModal(organization.organizationId)" value="Details"></td>
+            <td><input type="button" (click)="editModal(organization.organizationId)" value="Edit"></td>
+            <td><input type="button" (click)="deleteModal(organization.organizationId)" value="Delete"></td>
         </tr>
     </table>
 </div>
