@@ -4,6 +4,7 @@ import { Organization } from 'src/app/models/organization.model';
 import { OrganizationService } from 'src/app/services/organization.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { OrganizationDetailsModalComponent } from '../organization-details-modal/organization-details-modal.component';
+import { OrganizationCreateModalComponent } from '../organization-create-modal/organization-create-modal.component';
 
 @Component({
   selector: 'app-organization',
@@ -19,6 +20,10 @@ export class OrganizationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fetchOrganizations()
+  }
+
+  fetchOrganizations() {
     this.organizationService.fetchOrganizations().subscribe(
       organizations => {
         this.organizations = organizations
@@ -27,7 +32,8 @@ export class OrganizationComponent implements OnInit {
   }
 
   detailsModal(organizationId: number) {
-    this.dialog.open(OrganizationDetailsModalComponent, { data: { id: organizationId } });
+    this.dialog
+      .open(OrganizationDetailsModalComponent, { data: { id: organizationId } })
   }
 
   editModal(organizationId: number) {
@@ -41,8 +47,10 @@ export class OrganizationComponent implements OnInit {
   }
 
   createModal() {
-    //TODO
-    console.log('create organization')
+    this.dialog
+      .open(OrganizationCreateModalComponent)
+      .afterClosed()
+      .subscribe(() => this.fetchOrganizations())
   }
 
 }

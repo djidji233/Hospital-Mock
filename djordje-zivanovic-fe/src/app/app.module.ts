@@ -14,6 +14,7 @@ import { FormsModule } from "@angular/forms";
 import { OrganizationDetailsModalComponent } from './components/organization-details-modal/organization-details-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OrganizationCreateModalComponent } from './components/organization-create-modal/organization-create-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PractitionerComponent,
     PatientComponent,
     ExaminationComponent,
-    OrganizationDetailsModalComponent
+    OrganizationDetailsModalComponent,
+    OrganizationCreateModalComponent
   ],
   imports: [
     BrowserModule,

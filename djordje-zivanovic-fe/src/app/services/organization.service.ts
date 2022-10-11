@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Organization } from '../models/organization.model';
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable, resolveForwardRef } from '@angular/core';
+import { catchError, Observable, throwError } from 'rxjs';
+import { Organization, OrganizationCreationRequest } from '../models/organization.model';
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +34,24 @@ export class OrganizationService {
 
   public fetchOrganizationById(organizationId: number): Observable<Organization> {
     return this.http.get<Organization>(
-      this.organizationUrl+organizationId,
+      this.organizationUrl + organizationId,
       {
         params: {},
         headers: {}
+      }
+    )
+  }
+
+  public createOrganization(request: OrganizationCreationRequest): Observable<Organization> {
+    const body = JSON.stringify(request)
+    return this.http.post<Organization>(
+      this.organizationUrl,
+      body,
+      {
+        params: {},
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
     )
   }

@@ -15,9 +15,28 @@ export interface OrganizationType {
 }
 
 export enum OrganizationTypeEnum {
-    HOSPITAL,
-    INSURANCE_COMPANY,
-    EDUCATIONAL_INSTITUTE,
-    CLINICAL_RESEARCH,
-    OTHER
+    HOSPITAL = "Hospital",
+    INSURANCE_COMPANY = "Insurance company",
+    EDUCATIONAL_INSTITUTE = "Educational institute",
+    CLINICAL_RESEARCH = "Clinical research",
+    OTHER = "Other"
+}
+
+export class OrganizationCreationRequest {
+    identifier: string;
+    type: string;
+    name: string;
+    address: string;
+    phone: string;
+    email: string;
+
+    constructor() {
+        this.identifier = ''
+        this.type = ''
+        this.name = ''
+        this.address = ''
+        this.phone = ''
+        this.email = ''
+    }
+
 }
