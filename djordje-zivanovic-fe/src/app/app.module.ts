@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrganizationCreateModalComponent } from './components/organization-create-modal/organization-create-modal.component';
 import { OrganizationUpdateModalComponent } from './components/organization-update-modal/organization-update-modal.component';
+import { PractitionerDetailsModalComponent } from './components/practitioner-details-modal/practitioner-details-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { OrganizationUpdateModalComponent } from './components/organization-upda
     ExaminationComponent,
     OrganizationDetailsModalComponent,
     OrganizationCreateModalComponent,
-    OrganizationUpdateModalComponent
+    OrganizationUpdateModalComponent,
+    PractitionerDetailsModalComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { Practitioner } from 'src/app/models/practitioner.model';
 import { PractitionerService } from 'src/app/services/practitioner.service';
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { PractitionerDetailsModalComponent } from '../practitioner-details-modal/practitioner-details-modal.component';
 
 @Component({
   selector: 'app-practitioner',
@@ -30,7 +31,8 @@ export class PractitionerComponent implements OnInit {
   }
 
   detailsModal(practitionerId: number) {
-    //TODO
+    this.dialog
+      .open(PractitionerDetailsModalComponent, { data: { id: practitionerId } })
   }
 
   editModal(practitionerId: number) {

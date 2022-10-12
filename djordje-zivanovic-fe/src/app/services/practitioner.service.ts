@@ -30,4 +30,14 @@ export class PractitionerService {
     return this.practitioners;
   }
 
+  public fetchPractitionerById(practitionerId: number): Observable<Practitioner> {
+    return this.http.get<Practitioner>(
+      this.practitionerUrl + practitionerId,
+      {
+        params: {},
+        headers: {}
+      }
+    )
+  }
+
 }
