@@ -16,7 +16,7 @@
             </div>
             <div class="col">
                 <select name="type" [(ngModel)]="request.type">
-                    <option *ngFor="let type of organizationTypes" [selected]="type === organization.type.organizationType">
+                    <option *ngFor="let type of organizationTypes" [selected]="type === organization.type?.organizationType">
                         {{type}}
                     </option>
                 </select>

@@ -2,7 +2,7 @@ export interface Organization {
     organizationId: number,
     identifier: string,
     active: boolean,
-    type: OrganizationType,
+    type: any,
     name: string,
     address: string,
     phone: string,
