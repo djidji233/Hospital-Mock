@@ -10,13 +10,18 @@ import { ExaminationComponent } from './components/examination/examination.compo
 
 import { HttpClientModule } from "@angular/common/http";
 
+import { MatDatepickerModule } from "@angular/material/datepicker";
 import { FormsModule } from "@angular/forms";
 import { OrganizationDetailsModalComponent } from './components/organization-details-modal/organization-details-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrganizationCreateModalComponent } from './components/organization-create-modal/organization-create-modal.component';
 import { OrganizationUpdateModalComponent } from './components/organization-update-modal/organization-update-modal.component';
 import { PractitionerDetailsModalComponent } from './components/practitioner-details-modal/practitioner-details-modal.component';
+import { PractitionerCreateModalComponent } from './components/practitioner-create-modal/practitioner-create-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,8 @@ import { PractitionerDetailsModalComponent } from './components/practitioner-det
     OrganizationDetailsModalComponent,
     OrganizationCreateModalComponent,
     OrganizationUpdateModalComponent,
-    PractitionerDetailsModalComponent
+    PractitionerDetailsModalComponent,
+    PractitionerCreateModalComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,11 @@ import { PractitionerDetailsModalComponent } from './components/practitioner-det
     HttpClientModule,
     FormsModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent],

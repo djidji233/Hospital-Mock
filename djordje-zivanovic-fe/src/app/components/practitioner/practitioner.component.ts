@@ -4,6 +4,7 @@ import { PractitionerService } from 'src/app/services/practitioner.service';
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PractitionerDetailsModalComponent } from '../practitioner-details-modal/practitioner-details-modal.component';
+import { PractitionerCreateModalComponent } from '../practitioner-create-modal/practitioner-create-modal.component';
 
 @Component({
   selector: 'app-practitioner',
@@ -44,7 +45,10 @@ export class PractitionerComponent implements OnInit {
   }
 
   createModal() {
-    //TODO
+    this.dialog
+      .open(PractitionerCreateModalComponent)
+      .afterClosed()
+      .subscribe(() => this.fetchPractitioners())
   }
 
 }

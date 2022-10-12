@@ -1,7 +1,8 @@
 import { Injectable, resolveForwardRef } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Practitioner } from '../models/practitioner.model';
+import { Practitioner, PractitionerCreationModificationRequest } from '../models/practitioner.model';
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { Organization } from '../models/organization.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,20 @@ export class PractitionerService {
       {
         params: {},
         headers: {}
+      }
+    )
+  }
+
+  public createPractitioner(request: PractitionerCreationModificationRequest): Observable<Practitioner> {
+    const body = JSON.stringify(request)
+    return this.http.post<Practitioner>(
+      this.practitionerUrl,
+      body,
+      {
+        params: {},
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
     )
   }

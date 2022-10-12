@@ -14,7 +14,7 @@
             <td>{{practitioner.name}}</td>
             <td>{{practitioner.surname}}</td>
             <td>{{practitioner.qualification}}</td>
-            <td>{{practitioner.organization.name}}</td>
+            <td>{{practitioner.organization?.name}}</td>
             <td><input type="button" (click)="detailsModal(practitioner.practitionerId)" value="Details"></td>
             <td><input type="button" (click)="editModal(practitioner.practitionerId)" value="Edit"></td>
             <td><input type="button" (click)="deleteModal(practitioner.practitionerId, practitioner.name)" value="Delete"></td>
