@@ -69,4 +69,10 @@ export class PractitionerService {
     )
   }
 
+  public deletePractitioner(practitionerId: number): Observable<any> {
+    return this.http.delete<any>(
+      this.practitionerUrl + practitionerId
+    )
+  }
+
 }

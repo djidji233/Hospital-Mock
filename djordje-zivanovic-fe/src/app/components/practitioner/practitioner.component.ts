@@ -39,13 +39,25 @@ export class PractitionerComponent implements OnInit {
 
   editModal(practitionerId: number) {
     this.dialog
-    .open(PractitionerUpdateModalComponent, { data: { id: practitionerId } })
-    .afterClosed()
-    .subscribe(() => this.fetchPractitioners())
+      .open(PractitionerUpdateModalComponent, { data: { id: practitionerId } })
+      .afterClosed()
+      .subscribe(() => this.fetchPractitioners())
   }
 
   deleteModal(practitionerId: number, practitionerName: string) {
-    //TODO
+    if (confirm('Are you sure you want to delete practitioner: ' + practitionerName)) {
+      this.practitonerService.deletePractitioner(practitionerId)
+        .subscribe(
+          (res) => this.fetchPractitioners(),
+          (error) => {
+            let errorStr = JSON.stringify(error.error)
+            errorStr = errorStr.substring(1, errorStr.length - 1)
+            let errors = errorStr.split(',').join('\n')
+            console.log(errors)
+            alert(errors)
+          }
+        )
+    }
   }
 
   createModal() {
