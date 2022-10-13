@@ -39,8 +39,20 @@ export class PatientComponent implements OnInit {
       .subscribe(() => this.fetchPatients())
   }
 
-  deleteModal(patientId: number, patientrName: string, patientSurname: string) {
-    //TODO
+  deleteModal(patientId: number, patientName: string, patientSurname: string) {
+    if (confirm('Are you sure you want to delete patient: ' + patientName + ' ' + patientSurname)) {
+      this.patientService.deletePatient(patientId)
+        .subscribe(
+          (res) => this.fetchPatients(),
+          (error) => {
+            let errorStr = JSON.stringify(error.error)
+            errorStr = errorStr.substring(1, errorStr.length - 1)
+            let errors = errorStr.split(',').join('\n')
+            console.log(errors)
+            alert(errors)
+          }
+        )
+    }
   }
 
   createModal() {

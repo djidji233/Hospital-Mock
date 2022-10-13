@@ -68,4 +68,10 @@ export class PatientService {
     )
   }
 
+  public deletePatient(patientId: number): Observable<any> {
+    return this.http.delete<any>(
+      this.patientUrl + patientId
+    )
+  }
+
 }
