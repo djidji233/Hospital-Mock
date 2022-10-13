@@ -1,0 +1,121 @@
+<h2 mat-dialog-title>Patient details</h2>
+<mat-dialog-content class="mat-typography">
+
+    <form>
+        <div class="row">
+            <div class="col">
+                <label>Database ID:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{patient.patientId}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Identifier:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{patient.identifier}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Active:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{patient.active}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Name:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{patient.name}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Surname:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{patient.surname}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Gender:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{patient.gender}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Birthday:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{patient.birthDate}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Address:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{patient.address}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Phone:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{patient.phone}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Email:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{patient.email}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Deceased:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{patient.deceased}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Marital status:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{patient.maritalStatus}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Organization:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{patient.organization?.name}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Care provider:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{patient.primaryCareProvider?.name}} {{patient.primaryCareProvider?.surname}}"><br>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

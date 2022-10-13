@@ -30,4 +30,14 @@ export class PatientService {
     return this.patients;
   }
 
+  public fetchPatientById(patientId: number): Observable<Patient> {
+    return this.http.get<Patient>(
+      this.patientUrl + patientId,
+      {
+        params: {},
+        headers: {}
+      }
+    )
+  }
+
 }

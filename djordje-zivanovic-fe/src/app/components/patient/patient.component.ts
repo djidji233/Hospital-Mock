@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Patient } from 'src/app/models/patient.model';
 import { PatientService } from 'src/app/services/patient.service';
+import { PatientDetailsModalComponent } from '../patient-details-modal/patient-details-modal.component';
 
 @Component({
   selector: 'app-patient',
@@ -11,7 +13,7 @@ export class PatientComponent implements OnInit {
 
   patients: Patient[]
 
-  constructor(private patientService: PatientService) {
+  constructor(private patientService: PatientService, public dialog: MatDialog) {
     this.patients = []
   }
 
@@ -24,7 +26,8 @@ export class PatientComponent implements OnInit {
   }
 
   detailsModal(patientId: number) {
-    //TODO
+    this.dialog
+      .open(PatientDetailsModalComponent, { data: { id: patientId } })
   }
 
   editModal(patientId: number) {

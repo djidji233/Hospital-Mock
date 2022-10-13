@@ -23,6 +23,7 @@ import { OrganizationUpdateModalComponent } from './components/organization-upda
 import { PractitionerDetailsModalComponent } from './components/practitioner-details-modal/practitioner-details-modal.component';
 import { PractitionerCreateModalComponent } from './components/practitioner-create-modal/practitioner-create-modal.component';
 import { PractitionerUpdateModalComponent } from './components/practitioner-update-modal/practitioner-update-modal.component';
+import { PatientDetailsModalComponent } from './components/patient-details-modal/patient-details-modal.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PractitionerUpdateModalComponent } from './components/practitioner-upda
     OrganizationUpdateModalComponent,
     PractitionerDetailsModalComponent,
     PractitionerCreateModalComponent,
-    PractitionerUpdateModalComponent
+    PractitionerUpdateModalComponent,
+    PatientDetailsModalComponent
   ],
   imports: [
     BrowserModule,
