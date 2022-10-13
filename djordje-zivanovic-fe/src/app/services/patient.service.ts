@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Patient } from '../models/patient.model';
+import { Patient, PatientCreationModificationRequest } from '../models/patient.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +36,20 @@ export class PatientService {
       {
         params: {},
         headers: {}
+      }
+    )
+  }
+
+  public createPatient(request: PatientCreationModificationRequest): Observable<Patient> {
+    const body = JSON.stringify(request)
+    return this.http.post<Patient>(
+      this.patientUrl,
+      body,
+      {
+        params: {},
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
     )
   }

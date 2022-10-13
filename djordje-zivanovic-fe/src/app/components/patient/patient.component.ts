@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Patient } from 'src/app/models/patient.model';
 import { PatientService } from 'src/app/services/patient.service';
+import { PatientCreateModalComponent } from '../patient-create-modal/patient-create-modal.component';
 import { PatientDetailsModalComponent } from '../patient-details-modal/patient-details-modal.component';
 
 @Component({
@@ -39,7 +40,10 @@ export class PatientComponent implements OnInit {
   }
 
   createModal() {
-    //TODO
+    this.dialog
+      .open(PatientCreateModalComponent)
+      .afterClosed()
+      .subscribe(() => this.fetchPatients())
   }
 
 

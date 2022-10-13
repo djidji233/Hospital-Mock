@@ -1,8 +1,8 @@
 export enum MaritalStatusEnum {
-    ANNULLED,
-    DIVORCED,
-    MARRIED,
-    POLYGAMOUS,
-    NEVER_MARRIED,
-    WIDOWED
+    ANNULLED = "Annulled",
+    DIVORCED = "Divorced",
+    MARRIED = "Married",
+    POLYGAMOUS = "Polygamous",
+    NEVER_MARRIED = "Never married",
+    WIDOWED = "Widowed"
 }
