@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Practitioner } from 'src/app/models/practitioner.model';
+import { PractitionerService } from 'src/app/services/practitioner.service';
+import { ActivatedRoute, Router } from "@angular/router";
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { PractitionerDetailsModalComponent } from '../practitioner-details-modal/practitioner-details-modal.component';
+import { PractitionerCreateModalComponent } from '../practitioner-create-modal/practitioner-create-modal.component';
+import { PractitionerUpdateModalComponent } from '../practitioner-update-modal/practitioner-update-modal.component';
 
 @Component({
   selector: 'app-practitioner',
@@ -7,9 +14,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PractitionerComponent implements OnInit {
 
-  constructor() { }
+  practitioners: Practitioner[]
+
+  constructor(private practitonerService: PractitionerService, private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog) {
+    this.practitioners = []
+  }
 
   ngOnInit(): void {
+    this.fetchPractitioners()
+  }
+
+  fetchPractitioners() {
+    this.practitonerService.fetchPractitioners().subscribe(
+      practitioners => {
+        this.practitioners = practitioners;
+      }
+    )
+  }
+
+  detailsModal(practitionerId: number) {
+    this.dialog
+      .open(PractitionerDetailsModalComponent, { data: { id: practitionerId } })
+  }
+
+  editModal(practitionerId: number) {
+    this.dialog
+      .open(PractitionerUpdateModalComponent, { data: { id: practitionerId } })
+      .afterClosed()
+      .subscribe(() => this.fetchPractitioners())
+  }
+
+  deleteModal(practitionerId: number, practitionerName: string) {
+    if (confirm('Are you sure you want to delete practitioner: ' + practitionerName)) {
+      this.practitonerService.deletePractitioner(practitionerId)
+        .subscribe(
+          (res) => this.fetchPractitioners(),
+          (error) => {
+            let errorStr = JSON.stringify(error.error)
+            errorStr = errorStr.substring(1, errorStr.length - 1)
+            let errors = errorStr.split(',').join('\n')
+            console.log(errors)
+            alert(errors)
+          }
+        )
+    }
+  }
+
+  createModal() {
+    this.dialog
+      .open(PractitionerCreateModalComponent)
+      .afterClosed()
+      .subscribe(() => this.fetchPractitioners())
   }
 
 }

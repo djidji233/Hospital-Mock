@@ -155,6 +155,12 @@ public class OrganizationServiceImpl implements OrganizationService {
         if (deleted.getExaminations().stream().noneMatch(examination -> examination.getStatus() == ExaminationStatusEnum.IN_PROGRESS)) {
             deleted.setActive(false);
             organizationRepository.save(deleted);
+            deleted.getPractitioners().forEach(
+                    practitioner -> {
+                        practitioner.setOrganization(null);
+                        practitionerRepository.save(practitioner);
+                    }
+            );
             deleted.getPatients().forEach(
                     patient -> {
                         patient.setOrganization(null);
