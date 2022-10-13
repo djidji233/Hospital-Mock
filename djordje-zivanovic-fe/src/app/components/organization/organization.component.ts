@@ -49,7 +49,13 @@ export class OrganizationComponent implements OnInit {
       this.organizationService.deleteOrganization(organizationId)
         .subscribe(
           (res) => this.fetchOrganizations(),
-          (error) => alert('Unable to delete organization')
+          (error) => {
+            let errorStr = JSON.stringify(error.error)
+            errorStr = errorStr.substring(1, errorStr.length - 1)
+            let errors = errorStr.split(',').join('\n')
+            console.log(errors)
+            alert(errors)
+          }
         )
     }
   }

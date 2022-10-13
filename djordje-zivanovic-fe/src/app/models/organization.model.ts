@@ -2,7 +2,7 @@ export interface Organization {
     organizationId: number,
     identifier: string,
     active: boolean,
-    type: OrganizationType,
+    type: any,
     name: string,
     address: string,
     phone: string,
@@ -29,14 +29,4 @@ export class OrganizationCreationModificationRequest {
     address: string | undefined;
     phone: string | undefined;
     email: string | undefined;
-
-    constructor() {
-        this.identifier = ''
-        this.type = ''
-        this.name = ''
-        this.address = ''
-        this.phone = ''
-        this.email = ''
-    }
-
 }

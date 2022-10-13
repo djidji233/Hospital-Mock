@@ -1,0 +1,97 @@
+<h2 mat-dialog-title>Practitioner details</h2>
+<mat-dialog-content class="mat-typography">
+
+    <form>
+        <div class="row">
+            <div class="col">
+                <label>Database ID:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{practitioner.practitionerId}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Identifier:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{practitioner.identifier}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Active:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{practitioner.active}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Name:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{practitioner.name}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Surname:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{practitioner.surname}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Gender:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{practitioner.gender}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Birthday:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{practitioner.birthDate}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Address:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{practitioner.address}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Phone:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{practitioner.phone}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Email:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{practitioner.email}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Organization:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{practitioner.organization?.name}}"><br>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
