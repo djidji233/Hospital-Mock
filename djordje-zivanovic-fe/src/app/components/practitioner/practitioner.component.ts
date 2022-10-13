@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Practitioner } from 'src/app/models/practitioner.model';
 import { PractitionerService } from 'src/app/services/practitioner.service';
-import { ActivatedRoute, Router } from "@angular/router";
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { PractitionerDetailsModalComponent } from '../practitioner-details-modal/practitioner-details-modal.component';
 import { PractitionerCreateModalComponent } from '../practitioner-create-modal/practitioner-create-modal.component';
 import { PractitionerUpdateModalComponent } from '../practitioner-update-modal/practitioner-update-modal.component';
@@ -16,7 +15,7 @@ export class PractitionerComponent implements OnInit {
 
   practitioners: Practitioner[]
 
-  constructor(private practitonerService: PractitionerService, private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog) {
+  constructor(private practitonerService: PractitionerService, public dialog: MatDialog) {
     this.practitioners = []
   }
 
@@ -44,8 +43,8 @@ export class PractitionerComponent implements OnInit {
       .subscribe(() => this.fetchPractitioners())
   }
 
-  deleteModal(practitionerId: number, practitionerName: string) {
-    if (confirm('Are you sure you want to delete practitioner: ' + practitionerName)) {
+  deleteModal(practitionerId: number, practitionerName: string, practitionerSurname: string) {
+    if (confirm('Are you sure you want to delete practitioner: ' + practitionerName + ' ' + practitionerSurname)) {
       this.practitonerService.deletePractitioner(practitionerId)
         .subscribe(
           (res) => this.fetchPractitioners(),

@@ -17,7 +17,7 @@
             <td>{{practitioner.organization?.name}}</td>
             <td><input type="button" (click)="detailsModal(practitioner.practitionerId)" value="Details"></td>
             <td><input type="button" (click)="editModal(practitioner.practitionerId)" value="Edit"></td>
-            <td><input type="button" (click)="deleteModal(practitioner.practitionerId, practitioner.name)" value="Delete"></td>
+            <td><input type="button" (click)="deleteModal(practitioner.practitionerId, practitioner.name, practitioner.surname)" value="Delete"></td>
         </tr>
     </table>
 </div>
