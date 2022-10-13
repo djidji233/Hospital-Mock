@@ -150,6 +150,8 @@ public class BootstrapData implements CommandLineRunner {
         practitioner.setExaminations(List.of(examination));
         practitioner.setPatients(List.of(patient));
         practitionerRepository.save(practitioner);
+        organization.setPractitioners(List.of(practitioner));
+        organizationRepository.save(organization);
 
         System.out.println("Data loaded!");
 
