@@ -1,1 +1,23 @@
-<p>patient works!</p>
+<div class="col-sm-4">
+    <h1>Patients</h1>
+    <table>
+        <tr>
+            <th>Identifier</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Organization</th>
+            <th>Care provider</th>
+            <th><input type="button" (click)="createModal()" value="Create"></th>
+        </tr>
+        <tr *ngFor="let patient of patients">
+            <td>{{patient.identifier}}</td>
+            <td>{{patient.name}}</td>
+            <td>{{patient.surname}}</td>
+            <td>{{patient.organization?.name}}</td>
+            <td>{{patient.primaryCareProvider?.name}} {{patient.primaryCareProvider?.surname}}</td>
+            <td><input type="button" (click)="detailsModal(patient.patientId)" value="Details"></td>
+            <td><input type="button" (click)="editModal(patient.patientId)" value="Edit"></td>
+            <td><input type="button" (click)="deleteModal(patient.patientId, patient.name, patient.surname)" value="Delete"></td>
+        </tr>
+    </table>
+</div>

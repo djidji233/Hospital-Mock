@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
 import { Organization } from 'src/app/models/organization.model';
 import { OrganizationService } from 'src/app/services/organization.service';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { OrganizationDetailsModalComponent } from '../organization-details-modal/organization-details-modal.component';
 import { OrganizationCreateModalComponent } from '../organization-create-modal/organization-create-modal.component';
 import { OrganizationUpdateModalComponent } from '../organization-update-modal/organization-update-modal.component';
@@ -16,7 +15,7 @@ export class OrganizationComponent implements OnInit {
 
   organizations: Organization[]
 
-  constructor(private organizationService: OrganizationService, private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog) {
+  constructor(private organizationService: OrganizationService, public dialog: MatDialog) {
     this.organizations = []
   }
 
