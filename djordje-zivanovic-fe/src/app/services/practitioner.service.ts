@@ -55,4 +55,18 @@ export class PractitionerService {
     )
   }
 
+  public updatePractitioner(practitionerId: number, request: PractitionerCreationModificationRequest): Observable<Practitioner> {
+    const body = JSON.stringify(request)
+    return this.http.patch<Practitioner>(
+      this.practitionerUrl + practitionerId,
+      body,
+      {
+        params: {},
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+  }
+
 }

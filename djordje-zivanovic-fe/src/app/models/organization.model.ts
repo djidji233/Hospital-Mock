@@ -29,14 +29,4 @@ export class OrganizationCreationModificationRequest {
     address: string | undefined;
     phone: string | undefined;
     email: string | undefined;
-
-    constructor() {
-        this.identifier = ''
-        this.type = ''
-        this.name = ''
-        this.address = ''
-        this.phone = ''
-        this.email = ''
-    }
-
 }

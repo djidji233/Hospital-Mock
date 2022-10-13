@@ -29,12 +29,6 @@ export class OrganizationUpdateModalComponent implements OnInit {
   ngOnInit(): void {
     this.organizationService.fetchOrganizationById(this.data.id).subscribe(organization => {
       this.organization = organization;
-      // this.request.identifier = organization.identifier;
-      // this.request.type = organization.type.organizationType;
-      // this.request.name = organization.name;
-      // this.request.address = organization.address;
-      // this.request.phone = organization.phone;
-      // this.request.email = organization.email;
     })
   }
 
@@ -43,13 +37,6 @@ export class OrganizationUpdateModalComponent implements OnInit {
   }
 
   updateOrganization() {
-    this.request.identifier === "" ? this.request.identifier = undefined : this.request.identifier;
-    this.request.type === "" ? this.request.type = undefined : this.request.type;
-    this.request.name === "" ? this.request.name = undefined : this.request.name;
-    this.request.address === "" ? this.request.address = undefined : this.request.address;
-    this.request.phone === "" ? this.request.phone = undefined : this.request.phone;
-    this.request.email === "" ? this.request.email = undefined : this.request.email;
-
     this.organizationService.updateOrganization(this.organization.organizationId, this.request)
       .subscribe(
         (res) => {

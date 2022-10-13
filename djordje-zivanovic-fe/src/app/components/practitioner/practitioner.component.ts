@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PractitionerDetailsModalComponent } from '../practitioner-details-modal/practitioner-details-modal.component';
 import { PractitionerCreateModalComponent } from '../practitioner-create-modal/practitioner-create-modal.component';
+import { PractitionerUpdateModalComponent } from '../practitioner-update-modal/practitioner-update-modal.component';
 
 @Component({
   selector: 'app-practitioner',
@@ -37,7 +38,10 @@ export class PractitionerComponent implements OnInit {
   }
 
   editModal(practitionerId: number) {
-    //TODO
+    this.dialog
+    .open(PractitionerUpdateModalComponent, { data: { id: practitionerId } })
+    .afterClosed()
+    .subscribe(() => this.fetchPractitioners())
   }
 
   deleteModal(practitionerId: number, practitionerName: string) {

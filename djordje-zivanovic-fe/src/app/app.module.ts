@@ -22,6 +22,7 @@ import { OrganizationCreateModalComponent } from './components/organization-crea
 import { OrganizationUpdateModalComponent } from './components/organization-update-modal/organization-update-modal.component';
 import { PractitionerDetailsModalComponent } from './components/practitioner-details-modal/practitioner-details-modal.component';
 import { PractitionerCreateModalComponent } from './components/practitioner-create-modal/practitioner-create-modal.component';
+import { PractitionerUpdateModalComponent } from './components/practitioner-update-modal/practitioner-update-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { PractitionerCreateModalComponent } from './components/practitioner-crea
     OrganizationCreateModalComponent,
     OrganizationUpdateModalComponent,
     PractitionerDetailsModalComponent,
-    PractitionerCreateModalComponent
+    PractitionerCreateModalComponent,
+    PractitionerUpdateModalComponent
   ],
   imports: [
     BrowserModule,
