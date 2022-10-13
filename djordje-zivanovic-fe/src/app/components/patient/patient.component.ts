@@ -4,6 +4,7 @@ import { Patient } from 'src/app/models/patient.model';
 import { PatientService } from 'src/app/services/patient.service';
 import { PatientCreateModalComponent } from '../patient-create-modal/patient-create-modal.component';
 import { PatientDetailsModalComponent } from '../patient-details-modal/patient-details-modal.component';
+import { PatientUpdateModalComponent } from '../patient-update-modal/patient-update-modal.component';
 
 @Component({
   selector: 'app-patient',
@@ -32,7 +33,10 @@ export class PatientComponent implements OnInit {
   }
 
   editModal(patientId: number) {
-    //TODO
+    this.dialog
+      .open(PatientUpdateModalComponent, { data: { id: patientId } })
+      .afterClosed()
+      .subscribe(() => this.fetchPatients())
   }
 
   deleteModal(patientId: number, patientrName: string, patientSurname: string) {

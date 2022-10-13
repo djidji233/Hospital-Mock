@@ -54,4 +54,18 @@ export class PatientService {
     )
   }
 
+  public updatePatient(patientId: number, request: PatientCreationModificationRequest): Observable<Patient> {
+    const body = JSON.stringify(request)
+    return this.http.patch<Patient>(
+      this.patientUrl + patientId,
+      body,
+      {
+        params: {},
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+  }
+
 }
