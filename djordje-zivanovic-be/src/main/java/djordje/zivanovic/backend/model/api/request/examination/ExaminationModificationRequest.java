@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -24,13 +25,13 @@ public class ExaminationModificationRequest {
 
     private String priority;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd HH:mm")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date startDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime startDate;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd HH:mm")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date endDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime endDate;
 
     private String diagnosis;
 

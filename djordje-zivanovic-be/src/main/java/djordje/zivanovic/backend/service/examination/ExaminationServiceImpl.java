@@ -41,9 +41,9 @@ public class ExaminationServiceImpl implements ExaminationService {
 
     @Override
     public List<Examination> findAll(Long organizationId, ExaminationStatusEnum status, ExaminationPriorityEnum priority, Long practitionerId, Long patientId) {
-        if (organizationId == null && status == null && priority == null && practitionerId == null && patientId == null) {
-            return new ArrayList<>();
-        } else {
+//        if (organizationId == null && status == null && priority == null && practitionerId == null && patientId == null) {
+//            return new ArrayList<>();
+//        } else {
             return examinationRepository
                     .findAll()
                     .stream()
@@ -83,7 +83,7 @@ public class ExaminationServiceImpl implements ExaminationService {
                         }
                     })
                     .collect(Collectors.toList());
-        }
+//        }
     }
 
     @Override
