@@ -25,7 +25,12 @@ export class PractitionerUpdateModalComponent implements OnInit {
   @Input() genderEnums: string[]
   practitioner: Practitioner;
 
-  constructor(private practitionerService: PractitionerService, private organizationService: OrganizationService, @Inject(MAT_DIALOG_DATA) public data: DialogData, private dialogRef: MatDialogRef<PractitionerUpdateModalComponent>) {
+  constructor(
+    private practitionerService: PractitionerService,
+    private organizationService: OrganizationService,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private dialogRef: MatDialogRef<PractitionerUpdateModalComponent>
+  ) {
     this.request = new PractitionerCreationModificationRequest()
     this.organizations = []
     this.qualificationEnums = []

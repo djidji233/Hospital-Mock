@@ -26,6 +26,9 @@ import { PractitionerUpdateModalComponent } from './components/practitioner-upda
 import { PatientDetailsModalComponent } from './components/patient-details-modal/patient-details-modal.component';
 import { PatientCreateModalComponent } from './components/patient-create-modal/patient-create-modal.component';
 import { PatientUpdateModalComponent } from './components/patient-update-modal/patient-update-modal.component';
+import { ExaminationDetailsModalComponent } from './components/examination-details-modal/examination-details-modal.component';
+import { ExaminationCreateModalComponent } from './components/examination-create-modal/examination-create-modal.component';
+import { ExaminationUpdateModalComponent } from './components/examination-update-modal/examination-update-modal.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { PatientUpdateModalComponent } from './components/patient-update-modal/p
     PractitionerUpdateModalComponent,
     PatientDetailsModalComponent,
     PatientCreateModalComponent,
-    PatientUpdateModalComponent
+    PatientUpdateModalComponent,
+    ExaminationDetailsModalComponent,
+    ExaminationCreateModalComponent,
+    ExaminationUpdateModalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 package djordje.zivanovic.backend.model.db.examination;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import djordje.zivanovic.backend.model.db.organization.Organization;
 import djordje.zivanovic.backend.model.db.patient.Patient;
 import djordje.zivanovic.backend.model.db.practitioner.Practitioner;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -41,10 +43,12 @@ public class Examination {
     private ExaminationPriorityEnum priority;
 
     @Column(name = "START_DATE")
-    private Date startDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm")
+    private LocalDateTime startDate;
 
     @Column(name = "END_DATE")
-    private Date endDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm")
+    private LocalDateTime endDate;
 
     @Column(name = "DIAGNOSIS")
     private String diagnosis;

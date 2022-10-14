@@ -1,1 +1,29 @@
-<p>examination works!</p>
+<div class="col-sm-4">
+    <h1>Examinations</h1>
+    <table>
+        <tr>
+            <th>Identifier</th>
+            <th>Service type</th>
+            <th>Status</th>
+            <th>Organization</th>
+            <th>Care providers</th>
+            <th>Patient</th>
+            <th>Start date</th>
+            <th>End date</th>
+            <th><input type="button" (click)="createModal()" value="Create"></th>
+        </tr>
+        <tr *ngFor="let examination of examinations">
+            <td>{{examination.identifier}}</td>
+            <td>{{examination.serviceType.serviceType}}</td>
+            <td>{{examination.status}}</td>
+            <td>{{examination.organization?.name}}</td>
+            <td><p *ngFor="let practitioner of examination.practitioners">{{practitioner.name}} {{practitioner.surname}}</p></td>
+            <td>{{examination.patient?.name}} {{examination.patient?.surname}}</td>
+            <td>{{examination.startDate}}</td>
+            <td>{{examination.endDate}}</td>
+            <td><input type="button" (click)="detailsModal(examination.examinationId)" value="Details"></td>
+            <td><input type="button" (click)="editModal(examination.examinationId)" value="Edit"></td>
+            <td><input type="button" (click)="deleteModal(examination.examinationId, examination.identifier)" value="Delete"></td>
+        </tr>
+    </table>
+</div>
