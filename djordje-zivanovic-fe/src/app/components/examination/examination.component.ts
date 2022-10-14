@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Examination } from 'src/app/models/examination.model';
 import { ExaminationService } from 'src/app/services/examination.service';
+import { ExaminationCreateModalComponent } from '../examination-create-modal/examination-create-modal.component';
 import { ExaminationDetailsModalComponent } from '../examination-details-modal/examination-details-modal.component';
 import { PatientDetailsModalComponent } from '../patient-details-modal/patient-details-modal.component';
 
@@ -40,6 +41,9 @@ export class ExaminationComponent implements OnInit {
   }
 
   createModal() {
-    //TODO
+    this.dialog
+      .open(ExaminationCreateModalComponent)
+      .afterClosed()
+      .subscribe(() => this.fetchExaminations())
   }
 }

@@ -1,0 +1,115 @@
+<h2 mat-dialog-title>Patient details</h2>
+<mat-dialog-content class="mat-typography">
+
+    <form>
+        <div class="row">
+            <div class="col">
+                <label>Identifier:</label>
+            </div>
+            <div class="col">
+                <input type="text" name="identifier" [(ngModel)]="request.identifier"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Status:</label>
+            </div>
+            <div class="col">
+                <select name="status" [(ngModel)]="request.status">
+                    <option *ngFor="let status of statusEnums">
+                        {{status}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Service Type:</label>
+            </div>
+            <div class="col">
+                <select name="serviceType" [(ngModel)]="request.serviceType">
+                    <option *ngFor="let type of serviceTypeEnums">
+                        {{type}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Priority:</label>
+            </div>
+            <div class="col">
+                <select name="priority" [(ngModel)]="request.priority">
+                    <option *ngFor="let priority of priorityEnums">
+                        {{priority}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Start date:</label>
+            </div>
+            <div class="col">
+                <input type="datetime-local" (change)="setStartDate($event)" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>End date:</label>
+            </div>
+            <div class="col">
+                <input type="datetime-local" (change)="setEndDate($event)" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Diagnosis:</label>
+            </div>
+            <div class="col">
+                <textarea name="diagnosis" rows="7" cols="50" [maxlength]="maxChars" [(ngModel)]="request.diagnosis"></textarea>
+                <label>{{request.diagnosis.length}} / {{maxChars}}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Organization:</label>
+            </div>
+            <div class="col">
+                <select name="organization" [(ngModel)]="request.organizationId">
+                    <option *ngFor="let org of organizations" [value]="org.organizationId">
+                        {{org.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Care providers:</label>
+            </div>
+            <div class="col">
+                <select name="careProvider" [(ngModel)]="request.practitionerIds" multiple>
+                    <option *ngFor="let practitioner of practitioners" [value]="practitioner.practitionerId">
+                        {{practitioner.name}} {{practitioner.surname}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Patient:</label>
+            </div>
+            <div class="col">
+                <select name="patient" [(ngModel)]="request.patientId">
+                    <option *ngFor="let patient of patients" [value]="patient.patientId">
+                        {{patient.name}} {{patient.surname}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close (click)="cancel()">Cancel</button>
+    <button mat-button cdkFocusInitial (click)="createExamination()">Create</button>
+</mat-dialog-actions>

@@ -53,3 +53,16 @@ export enum ExaminationPriorityEnum {
     RUSH_REPORTING = 'Rush reporting',
     TIMING_CRITICAL = 'Timing critical'
 }
+
+export class ExaminationCreationModificationRequest {
+    identifier: string | undefined;
+    status: string | undefined;
+    serviceType: string | undefined;
+    priority: string | undefined;
+    startDate: Date | undefined;
+    endDate: Date | undefined;
+    diagnosis: string = '';
+    organizationId: number | undefined;
+    patientId: number | undefined;
+    practitionerIds: number[] | undefined;
+}

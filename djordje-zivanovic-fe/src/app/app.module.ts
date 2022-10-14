@@ -27,6 +27,7 @@ import { PatientDetailsModalComponent } from './components/patient-details-modal
 import { PatientCreateModalComponent } from './components/patient-create-modal/patient-create-modal.component';
 import { PatientUpdateModalComponent } from './components/patient-update-modal/patient-update-modal.component';
 import { ExaminationDetailsModalComponent } from './components/examination-details-modal/examination-details-modal.component';
+import { ExaminationCreateModalComponent } from './components/examination-create-modal/examination-create-modal.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ExaminationDetailsModalComponent } from './components/examination-detai
     PatientDetailsModalComponent,
     PatientCreateModalComponent,
     PatientUpdateModalComponent,
-    ExaminationDetailsModalComponent
+    ExaminationDetailsModalComponent,
+    ExaminationCreateModalComponent
   ],
   imports: [
     BrowserModule,
