@@ -29,4 +29,11 @@ export class ExaminationService {
     )
     return this.examinations;
   }
+
+  public fetchExaminationById(examinationId: number):Observable<Examination>{
+    return this.http.get<Examination>(
+      this.examinationUrl+examinationId
+    )
+  }
+
 }

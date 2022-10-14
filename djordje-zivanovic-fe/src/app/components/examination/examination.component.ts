@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Examination } from 'src/app/models/examination.model';
 import { ExaminationService } from 'src/app/services/examination.service';
+import { ExaminationDetailsModalComponent } from '../examination-details-modal/examination-details-modal.component';
+import { PatientDetailsModalComponent } from '../patient-details-modal/patient-details-modal.component';
 
 @Component({
   selector: 'app-examination',
@@ -25,7 +27,8 @@ export class ExaminationComponent implements OnInit {
   }
 
   detailsModal(examinationId: number) {
-    //TODO
+    this.dialog
+      .open(ExaminationDetailsModalComponent, { data: { id: examinationId } })
   }
 
   editModal(examinationId: number) {

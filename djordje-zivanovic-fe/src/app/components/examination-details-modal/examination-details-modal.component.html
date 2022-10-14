@@ -1,0 +1,98 @@
+<h2 mat-dialog-title>Patient details</h2>
+<mat-dialog-content class="mat-typography">
+
+    <form>
+        <div class="row">
+            <div class="col">
+                <label>Database ID:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{examination.examinationId}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Identifier:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{examination.identifier}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Status:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{examination.status}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Service Type:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{examination.serviceType.serviceType}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Priority:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{examination.priority}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Start date:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{examination.startDate}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>End date:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{examination.endDate}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Diagnosis:</label>
+            </div>
+            <div class="col">
+                <p>{{examination.diagnosis}}</p><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Organization:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{examination.organization?.name}}"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Care providers:</label>
+            </div>
+            <div class="col-2">
+                <!-- <input *ngFor="let practitioner of examination.practitioners" type="search" disabled="true" value="{{practitioner.name}} {{practitioner.surname}}"><br> -->
+                <p *ngFor="let practitioner of examination.practitioners">{{practitioner.name}} {{practitioner.surname}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Patient:</label>
+            </div>
+            <div class="col">
+                <input type="text" disabled="true" value="{{examination.patient?.name}} {{examination.patient?.surname}}"><br>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
