@@ -64,4 +64,10 @@ export class ExaminationService {
     )
   }
 
+  public deleteExamination(examinationId: number): Observable<any> {
+    return this.http.delete<any>(
+      this.examinationUrl + examinationId
+    )
+  }
+
 }

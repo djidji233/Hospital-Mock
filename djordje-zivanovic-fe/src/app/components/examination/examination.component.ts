@@ -40,7 +40,19 @@ export class ExaminationComponent implements OnInit {
   }
 
   deleteModal(examinationId: number, examinationIdentifier: string) {
-    //TODO
+    if (confirm('Are you sure you want to delete examination: ' + examinationIdentifier)) {
+      this.examinationService.deleteExamination(examinationId)
+        .subscribe(
+          (res) => this.fetchExaminations(),
+          (error) => {
+            let errorStr = JSON.stringify(error.error)
+            errorStr = errorStr.substring(1, errorStr.length - 1)
+            let errors = errorStr.split(',').join('\n')
+            console.log(errors)
+            alert(errors)
+          }
+        )
+    }
   }
 
   createModal() {

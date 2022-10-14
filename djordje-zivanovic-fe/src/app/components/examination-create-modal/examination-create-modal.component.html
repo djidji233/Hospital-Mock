@@ -68,7 +68,7 @@
             </div>
             <div class="col">
                 <textarea name="diagnosis" rows="7" cols="50" [maxlength]="maxChars" [(ngModel)]="request.diagnosis"></textarea>
-                <label>{{request.diagnosis.length}} / {{maxChars}}</label>
+                <label>{{request.diagnosis?.length}} / {{maxChars}}</label>
             </div>
         </div>
         <div class="row">

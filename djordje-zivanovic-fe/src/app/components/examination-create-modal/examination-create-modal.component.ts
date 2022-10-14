@@ -62,7 +62,6 @@ export class ExaminationCreateModalComponent implements OnInit {
 
   setStartDate(event: any) {
     this.request.startDate = event.target.value
-    console.log(this.request.startDate?.getSeconds)
   }
 
   setEndDate(event: any) {
