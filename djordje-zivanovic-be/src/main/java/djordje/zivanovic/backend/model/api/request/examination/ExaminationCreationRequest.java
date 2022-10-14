@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -30,11 +31,11 @@ public class ExaminationCreationRequest {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 //    @JsonFormat(pattern = "yyyy-MM-ddTHH:mm")
-    private Date startDate;
+    private LocalDateTime startDate;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 //    @JsonFormat(pattern = "yyyy-MM-ddTHH:mm")
-    private Date endDate;
+    private LocalDateTime endDate;
 
     private String diagnosis;
 

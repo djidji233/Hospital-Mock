@@ -15,6 +15,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -103,8 +104,8 @@ public class BootstrapData implements CommandLineRunner {
 
         examination.setServiceType(serviceType);
         examination.setPriority(ExaminationPriorityEnum.ROUTINE);
-        examination.setStartDate(new Date(System.currentTimeMillis()));
-        examination.setEndDate(new Date(System.currentTimeMillis()+1000*60*15));
+        examination.setStartDate(LocalDateTime.now());
+        examination.setEndDate(LocalDateTime.now().plusMinutes(15));
         examination.setDiagnosis("Everything was ok on this routine check.");
 
         // organization

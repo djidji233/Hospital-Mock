@@ -4,7 +4,7 @@ import { Examination } from 'src/app/models/examination.model';
 import { ExaminationService } from 'src/app/services/examination.service';
 import { ExaminationCreateModalComponent } from '../examination-create-modal/examination-create-modal.component';
 import { ExaminationDetailsModalComponent } from '../examination-details-modal/examination-details-modal.component';
-import { PatientDetailsModalComponent } from '../patient-details-modal/patient-details-modal.component';
+import { ExaminationUpdateModalComponent } from '../examination-update-modal/examination-update-modal.component';
 
 @Component({
   selector: 'app-examination',
@@ -33,7 +33,10 @@ export class ExaminationComponent implements OnInit {
   }
 
   editModal(examinationId: number) {
-    //TODO
+    this.dialog
+      .open(ExaminationUpdateModalComponent, { data: { id: examinationId } })
+      .afterClosed()
+      .subscribe(() => this.fetchExaminations())
   }
 
   deleteModal(examinationId: number, examinationIdentifier: string) {

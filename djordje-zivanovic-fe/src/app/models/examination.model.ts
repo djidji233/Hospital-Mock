@@ -2,10 +2,10 @@ export interface Examination {
     examinationId: number,
     identifier: string,
     status: ExaminationStatusEnum,
-    serviceType: ServiceType,
+    serviceType: any,
     priority: ExaminationPriorityEnum,
-    startDate: Date,
-    endDate: Date,
+    startDate: string,
+    endDate: string,
     diagnosis: string,
     organization: any,
     patient: any,
@@ -61,7 +61,7 @@ export class ExaminationCreationModificationRequest {
     priority: string | undefined;
     startDate: Date | undefined;
     endDate: Date | undefined;
-    diagnosis: string = '';
+    diagnosis: any | undefined;
     organizationId: number | undefined;
     patientId: number | undefined;
     practitionerIds: number[] | undefined;

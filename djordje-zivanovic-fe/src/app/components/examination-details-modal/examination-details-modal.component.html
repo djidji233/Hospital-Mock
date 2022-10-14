@@ -31,7 +31,7 @@
                 <label>Service Type:</label>
             </div>
             <div class="col">
-                <input type="text" disabled="true" value="{{examination.serviceType.serviceType}}"><br>
+                <input type="text" disabled="true" value="{{examination.serviceType?.serviceType}}"><br>
             </div>
         </div>
         <div class="row">
@@ -63,7 +63,7 @@
                 <label>Diagnosis:</label>
             </div>
             <div class="col">
-                <p>{{examination.diagnosis}}</p><br>
+                <textarea rows="7" cols="50" disabled="true">{{examination.diagnosis}}</textarea><br>
             </div>
         </div>
         <div class="row">

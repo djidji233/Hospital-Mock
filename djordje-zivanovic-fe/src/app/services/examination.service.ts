@@ -50,4 +50,18 @@ export class ExaminationService {
     )
   }
 
+  public updateExamination(examinationId: number, request: ExaminationCreationModificationRequest): Observable<Examination> {
+    const body = JSON.stringify(request)
+    return this.http.patch<Examination>(
+      this.examinationUrl + examinationId,
+      body,
+      {
+        params: {},
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+  }
+
 }
