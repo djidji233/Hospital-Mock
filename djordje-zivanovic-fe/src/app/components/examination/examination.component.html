@@ -1,5 +1,78 @@
 <div class="col-sm-4">
     <h1>Examinations</h1>
+    <div class="row">
+        <div class="col">
+            <label>Status:</label>
+        </div>
+        <div class="col">
+            <select name="status" [(ngModel)]="examinationStatus">
+                <option [value]=""></option>
+                <option *ngFor="let status of statusEnums">
+                    {{status}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label>Priority:</label>
+        </div>
+        <div class="col">
+            <select name="priority" [(ngModel)]="examinationPriority">
+                <option [value]=""></option>
+                <option *ngFor="let priority of priorityEnums">
+                    {{priority}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label>Organization:</label>
+        </div>
+        <div class="col">
+            <select name="organization" [(ngModel)]="organizationId">
+                <option [value]=""></option>
+                <option *ngFor="let org of organizations" [value]="org.organizationId">
+                    {{org.name}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label>Practitioner:</label>
+        </div>
+        <div class="col">
+            <select name="careProvider" [(ngModel)]="practitionerId">
+                <option [value]=""></option>
+                <option *ngFor="let practitioner of practitioners" [value]="practitioner.practitionerId">
+                    {{practitioner.name}} {{practitioner.surname}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label>Patient:</label>
+        </div>
+        <div class="col">
+            <select name="patient" [(ngModel)]="patientId">
+                <option [value]=""></option>
+                <option *ngFor="let patient of patients" [value]="patient.patientId">
+                    {{patient.name}} {{patient.surname}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+
+        </div>
+        <div class="col col-lg-2">
+            <input type="button" (click)="fetchExaminations(organizationId,examinationStatus,examinationPriority,practitionerId,patientId)" value="Filter">
+        </div>
+    </div>
     <table>
         <tr>
             <th>Identifier</th>
