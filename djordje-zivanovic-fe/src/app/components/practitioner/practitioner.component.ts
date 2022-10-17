@@ -14,17 +14,26 @@ import { PractitionerUpdateModalComponent } from '../practitioner-update-modal/p
 export class PractitionerComponent implements OnInit {
 
   practitioners: Practitioner[]
+  unassigned: boolean;
 
   constructor(private practitonerService: PractitionerService, public dialog: MatDialog) {
+    this.unassigned = false;
     this.practitioners = []
   }
 
   ngOnInit(): void {
-    this.fetchPractitioners()
+    this.fetchPractitioners(this.unassigned)
   }
 
-  fetchPractitioners() {
-    this.practitonerService.fetchPractitioners().subscribe(
+  getUnassigned(){
+    this.unassigned = !this.unassigned;
+    this.fetchPractitioners(this.unassigned);
+  }
+
+  fetchPractitioners(unassigned: boolean) {
+    let organizationId = unassigned == true ? 0 : undefined;
+
+    this.practitonerService.fetchPractitioners(organizationId).subscribe(
       practitioners => {
         this.practitioners = practitioners;
       }
@@ -40,14 +49,14 @@ export class PractitionerComponent implements OnInit {
     this.dialog
       .open(PractitionerUpdateModalComponent, { data: { id: practitionerId } })
       .afterClosed()
-      .subscribe(() => this.fetchPractitioners())
+      .subscribe(() => this.fetchPractitioners(this.unassigned))
   }
 
   deleteModal(practitionerId: number, practitionerName: string, practitionerSurname: string) {
     if (confirm('Are you sure you want to delete practitioner: ' + practitionerName + ' ' + practitionerSurname)) {
       this.practitonerService.deletePractitioner(practitionerId)
         .subscribe(
-          (res) => this.fetchPractitioners(),
+          (res) => this.fetchPractitioners(this.unassigned),
           (error) => {
             let errorStr = JSON.stringify(error.error)
             errorStr = errorStr.substring(1, errorStr.length - 1)
@@ -63,7 +72,7 @@ export class PractitionerComponent implements OnInit {
     this.dialog
       .open(PractitionerCreateModalComponent)
       .afterClosed()
-      .subscribe(() => this.fetchPractitioners())
+      .subscribe(() => this.fetchPractitioners(this.unassigned))
   }
 
 }
