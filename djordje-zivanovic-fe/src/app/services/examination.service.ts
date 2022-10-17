@@ -19,13 +19,30 @@ export class ExaminationService {
     return this.examinations;
   }
 
-  public fetchExaminations(organizationId?: any, examinationStatus?: any): Observable<Examination[]> {
+  public fetchExaminations(
+    organizationId?: any,
+    examinationStatus?: any,
+    examinationPriority?: any,
+    practitionerId?: any,
+    patientId?: any
+  ): Observable<Examination[]> {
+
     let httpParams = new HttpParams()
+    
     if (organizationId !== undefined) {
       httpParams = httpParams.append("organizationId", organizationId)
     }
     if (examinationStatus != undefined) {
       httpParams = httpParams.append("status", examinationStatus)
+    }
+    if (examinationPriority != undefined) {
+      httpParams = httpParams.append("priority", examinationPriority)
+    }
+    if (practitionerId != undefined) {
+      httpParams = httpParams.append("practitionerId", practitionerId)
+    }
+    if (patientId != undefined) {
+      httpParams = httpParams.append("patientId", patientId)
     }
 
     this.examinations = this.http.get<Examination[]>(
