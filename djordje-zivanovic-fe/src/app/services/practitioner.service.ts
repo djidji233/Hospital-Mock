@@ -20,14 +20,19 @@ export class PractitionerService {
     return this.practitioners
   }
 
-  public fetchPractitioners(): Observable<Practitioner[]> {
+  public fetchPractitioners(organizationId?: any): Observable<Practitioner[]> {
+    let httpParams = new HttpParams()
+    if (organizationId !== undefined) {
+      httpParams = httpParams.append("organizationId", organizationId)
+    }
+
     this.practitioners = this.http.get<Practitioner[]>(
       this.practitionerUrl,
       {
-        params: {},
-        headers: {}
+        params: httpParams
       }
     )
+
     return this.practitioners;
   }
 

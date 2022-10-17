@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Examination, ExaminationCreationModificationRequest } from '../models/examination.model';
@@ -19,12 +19,19 @@ export class ExaminationService {
     return this.examinations;
   }
 
-  public fetchExaminations(): Observable<Examination[]> {
+  public fetchExaminations(organizationId?: any, examinationStatus?: any): Observable<Examination[]> {
+    let httpParams = new HttpParams()
+    if (organizationId !== undefined) {
+      httpParams = httpParams.append("organizationId", organizationId)
+    }
+    if (examinationStatus != undefined) {
+      httpParams = httpParams.append("status", examinationStatus)
+    }
+
     this.examinations = this.http.get<Examination[]>(
       this.examinationUrl,
       {
-        params: {},
-        headers: {}
+        params: httpParams
       }
     )
     return this.examinations;
