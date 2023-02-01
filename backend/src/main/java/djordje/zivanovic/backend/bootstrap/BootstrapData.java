@@ -15,8 +15,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -104,8 +102,8 @@ public class BootstrapData implements CommandLineRunner {
 
         examination.setServiceType(serviceType);
         examination.setPriority(ExaminationPriorityEnum.ROUTINE);
-        examination.setStartDate(LocalDateTime.now());
-        examination.setEndDate(LocalDateTime.now().plusMinutes(15));
+        examination.setStartDate(new Date(System.currentTimeMillis()));
+        examination.setEndDate(new Date(System.currentTimeMillis()+1000*60*15));
         examination.setDiagnosis("Everything was ok on this routine check.");
 
         // organization
@@ -138,8 +136,6 @@ public class BootstrapData implements CommandLineRunner {
         patient.setOrganization(organization);
         patient.setPrimaryCareProvider(practitioner);
         patientRepository.save(patient);
-        organization.setPatients(List.of(patient));
-        organizationRepository.save(organization);
 
         examination.setOrganization(organization);
         examination.setPractitioners(List.of(practitioner));
@@ -149,10 +145,7 @@ public class BootstrapData implements CommandLineRunner {
         organizationRepository.save(organization);
 
         practitioner.setExaminations(List.of(examination));
-        practitioner.setPatients(List.of(patient));
         practitionerRepository.save(practitioner);
-        organization.setPractitioners(List.of(practitioner));
-        organizationRepository.save(organization);
 
         System.out.println("Data loaded!");
 
